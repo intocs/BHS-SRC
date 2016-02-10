@@ -4,7 +4,9 @@ const PORT = 8000;
 var app = express();
 
 app.get('/', (req, res) => {
-    res.send("Hello, World!");
+    res.sendFile("index.html", {
+        root: "./frontend"
+    });
 });
 
 app.listen(PORT, () => {
