@@ -53,4 +53,5 @@ node_modules
 # sftp configuration file
 sftp-config.json
 
-
+### Bower ###
+bower_components .bower-cache .bower-registry .bower-tmp
