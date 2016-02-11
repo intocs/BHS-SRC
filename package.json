@@ -2,7 +2,7 @@
   "name": "bhs-science-resource-center",
   "version": "1.0.0",
   "description": "bhs science resource center website to help students contact alumni and various other things",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
