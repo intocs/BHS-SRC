@@ -1,7 +1,7 @@
 {
   "name": "bhs-science-resource-center",
   "version": "1.0.0",
-  "description": "bhs science resource center website to help students contact alumni and various other things",
+  "description": "BHS science resource center website to help students contact alumni and various other things",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,11 +17,17 @@
   },
   "homepage": "https://github.com/intocs/BHS-SRC#readme",
   "dependencies": {
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
     "body-parser": "^1.14.2",
+    "browserify": "^13.0.0",
     "express": "^4.13.4",
     "mongodb": "^2.1.7",
     "mongoose": "^4.4.3",
-    "morgan": "^1.6.1"
+    "morgan": "^1.6.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   },
   "devDependencies": {
     "bower": "^1.7.7"
