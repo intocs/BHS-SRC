@@ -16,4 +16,4 @@ How to Start Developing
      - If this doesn't work at first, first type ``` chmod +x scripts/init.sh ```, and then try again. This should make ``` init.sh ``` executable
 6. browse dank memes
 
-You should now have a fully functioning working copy of the code. Comments should be in each major file detailing how they work and their purpose. If you have any questions, Slack is your friend. (OR SO THEY SAY. HAHAHAHAHAHAHAH)
+You should now have a fully functioning working copy of the code. Comments should be in each major file detailing how they work and their purpose. If you have any questions, Slack is your friend. (OR SO THEY SAY. HAHAHAHAHAHAHAH) 
