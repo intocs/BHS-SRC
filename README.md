@@ -14,5 +14,5 @@ How to Start Developing
 4. Checkout the "Develop" branch (you can do this within the terminal by typing ``` git checkout develop ```)
 5. Type ``` scripts/init.sh ``` to load all the things
      - If this doesn't work at first, first type ``` chmod +x scripts/init.sh ```, and then try again. This should make ``` init.sh ``` executable
-
+6. browse dank memes
 You should now have a fully functioning working copy of the code. Comments should be in each major file detailing how they work and their purpose. If you have any questions, Slack is your friend. (OR SO THEY SAY. HAHAHAHAHAHAHAH)
