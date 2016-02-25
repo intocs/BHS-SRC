@@ -11,7 +11,7 @@ How to Start Developing
 
    Or, if you're feeling particularly awesome, you can always use the command line. Your call.
 3. Clone this repository, and navigate to it's location in Terminal.
-4. Checkout the "Develop" branch (you can do this within the terminal by typing ``` git checkout develop ```)
+4. Checkout the "Develop" branch (you can do this within the terminal by typing ``` git checkout Develop ```)
 5. Type ``` scripts/init.sh ``` to load all the things
      - If this doesn't work at first, first type ``` chmod +x scripts/init.sh ```, and then try again. This should make ``` init.sh ``` executable
 
