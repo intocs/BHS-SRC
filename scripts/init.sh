@@ -6,7 +6,8 @@ cd $(dirname $0)/..
 echo "[init.sh] Installing Dependencies"
 npm install
 
-echo "[init.sh] Generating JS Bundle..."
+chmod +x scripts/generateJSBundle.sh
+mkdir frontend/dist
 sh scripts/generateJSBundle.sh
 
 echo "[init.sh] Done!"
