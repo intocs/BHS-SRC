@@ -1,0 +1,3 @@
+# Ignore bundle files that have been built through browserify
+*bundle.js
+*Bundle.js
