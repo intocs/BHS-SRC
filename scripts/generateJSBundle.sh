@@ -6,4 +6,6 @@
 
 cd $(dirname $0)/..
 
+echo "[generateJSBundle.sh] Generating the frontend JS bundle..."
+
 node_modules/.bin/browserify -t [ babelify --presets [ react ] ] frontend/js/main.js -o frontend/dist/bundle.js
