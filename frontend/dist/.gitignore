@@ -1,0 +1,5 @@
+# Ignore all the files in this folder...
+*
+
+# Except this file (workaround for the fact that git doesn't include folders unless they have something in them.)
+!.gitignore

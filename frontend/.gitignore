@@ -1,2 +1,0 @@
-# Don't include distribution files which can be compiled from their constituent files
-dist/*

@@ -4,8 +4,9 @@
   "description": "BHS science resource center website to help students contact alumni and various other things",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./scripts/generateJSBundle.sh"
+    "build-test": "browserify -t [ babelify --presets [ es2015 react ] ] test/spec/frontendSpec.js | uglifyjs > test/spec/specBundle.js",
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] frontend/js/main.js -o frontend/dist/bundle.js",
+    "init": "npm install && npm run build && npm run build-test"
   },
   "repository": {
     "type": "git",
