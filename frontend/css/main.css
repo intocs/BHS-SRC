@@ -1,4 +1,41 @@
+/*Known issues
+	-headerline style leaves slight margins to left and right of line
+*/
+
 html, body {
     font-family: helvetica, sans-serif;
     background-color: #ffffff;
+}
+
+h1 {
+	font-size: 3em;
+	color: #4A4A4A;
+}
+
+.header{
+	margin: 5px;
+}
+
+.headerline{
+	height:3px;
+    padding:0px;
+    margin:0px;
+    background-color:#4A4A4A;
+    color:#4A4A4A;
+    border: 0 none;
+	-webkit-animation-name: expandright;
+	-webkit-animation-duration: 1.5s;
+	animation-name: expandright;
+	animation-duration: 1.5s;
+}
+
+/* For line under header, expanding from left to right*/
+
+@-webkit-keyframes expandright {
+	0%   {width:0%;}
+	100% {width:100%;}
+}
+@keyframes expandright {
+	0%   {width:0%;}
+	100% {width:100%;}
 }
