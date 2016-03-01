@@ -1,36 +1,22 @@
 html, body {
     font-family: helvetica, sans-serif;
-    background-color: #ffffff;
-    margin: 0px;
-    padding: 0px;
+    background-color: #fff;
     margin: 0;
     padding: 0;
 }
 h1 {
-<<<<<<< Updated upstream
-    font-size: 3em;
-    color: #4A4A4A;
-=======
 	font-size: 3em;
 	color: #4A4A4A;
-	margin:0px;
->>>>>>> Stashed changes
+	margin:0;
 }
 h2 {
-<<<<<<< Updated upstream
     font-size: 2.25em;
-    color: #858585;
-}
-.header {
-    margin: 5px;
-=======
-	font-size: 2.25em;
-	color: #4A4A4A;
-	margin:0px;
+    color: #4A4A4A;
+    margin:0;
 }
 
 h3 {
-	margin:0px;
+	margin:0;
 }
 
 a  {
@@ -45,10 +31,12 @@ a:hover{
 
 /*Begin header styles*/
 
-.header{
-	margin: 5px;
->>>>>>> Stashed changes
+.header {
+    margin: 5px;
+	font-size: 2.25em;
+	color: #4A4A4A;
 }
+
 .headerline {
     height: 3px;
     padding: 0;
@@ -56,17 +44,7 @@ a:hover{
     background-color: #4A4A4A;
     color: #4A4A4A;
     border: 0 none;
-<<<<<<< Updated upstream
-    -webkit-animation-name: expandright;
-    -webkit-animation-duration: 1.5s;
-    animation-name: expandright;
-    animation-duration: 1.5s;
 }
-.centersubheader {
-    text-align: center;
-=======
-}
-
 /*End header styles*/
 
 /*Begin showcase styles*/
@@ -104,7 +82,6 @@ a:hover{
 .centersubheader{
 	text-align:center;
 	color: #858585;
->>>>>>> Stashed changes
 }
 .subheaderline {
     height: 2px;
@@ -112,46 +89,19 @@ a:hover{
     background-color: #4A4A4A;
     color: #4A4A4A;
     border: 0 none;
-<<<<<<< Updated upstream
-    width: 60%;
-    
-    -webkit-animation-name: expandout;
-    -webkit-animation-duration: 1.5s;
-    animation-name: expandout;
-    animation-duration: 1.5s;
-=======
     width:100%;
 	-webkit-animation-name: expandout;
 	-webkit-animation-duration: 1.5s;
 	animation-name: expandout;
 	animation-duration: 1.5s;
->>>>>>> Stashed changes
 }
 
 .footer{
 	margin:5%;
 }
 
-<<<<<<< Updated upstream
-@-webkit-keyframes expandright {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-@keyframes expandright {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-=======
 .linkheaders{
 	margin-top:20px;
-	/*margin-bottom:10px;*/
 }
 
 .leftlinks{
@@ -160,7 +110,6 @@ a:hover{
 	width:33%;
 	vertical-align: top;
 	min-width:255px;
->>>>>>> Stashed changes
 }
 
 .middlelinks{
@@ -185,12 +134,11 @@ a:hover{
 
 /* For line animation under subheader, expanding from out*/
 @-webkit-keyframes expandout {
-<<<<<<< Updated upstream
     0% {
         width: 0;
     }
     100% {
-        width: 60%;
+        width: 100%;
     }
 }
 @keyframes expandout {
@@ -198,15 +146,8 @@ a:hover{
         width: 0;
     }
     100% {
-        width: 60%;
+        width: 100%;
     }
-=======
-	0%   {width:0%;}
-	100% {width:100%%;}
 }
-@keyframes expandout {
-	0%   {width:0%;}
-	100% {width:100%;}
->>>>>>> Stashed changes
-}
+
 /*End animations*/
