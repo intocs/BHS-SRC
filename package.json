@@ -32,6 +32,7 @@
     "react-dom": "^0.14.7"
   },
   "devDependencies": {
-    "bower": "^1.7.7"
+    "bower": "^1.7.7",
+    "uglify-js": "^2.6.2"
   }
 }
