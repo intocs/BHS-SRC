@@ -31,18 +31,47 @@ a:hover{
 
 /*Begin header styles*/
 
-.header {
+.pageHeader {
+    display: inline-block;
     margin: 5px;
 	font-size: 2.25em;
 	color: #4A4A4A;
 }
 
-.headerline {
+.headerLine {
     height: 3px;
     padding: 0;
     margin: 0;
     background-color: #4A4A4A;
     color: #4A4A4A;
     border: 0 none;
+}
+
+.headerButton {
+    display: inline-block;
+    float: right;
+    margin-top: calc(.5em + 5px);
+    margin-bottom: calc(.5em + 0px);
+    margin-right: 1em;
+    height: 2.25em;
+    border-style: solid;
+    border-radius: 3px;
+}
+
+.headerButton:active {
+    background-color: black;
+    border-radius: 3px;
+}
+
+#logInButton {
+    background-color: inherit;
+    border-width: 1.5px;
+    color: #4A4A4A;
+}
+
+#signUpButton {
+    background-color: inherit;
+    border-width: 1.5px;
+    color: #4A4A4A;
 }
 /*End header styles*/
