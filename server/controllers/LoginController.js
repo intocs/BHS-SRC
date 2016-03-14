@@ -3,9 +3,9 @@
 //this is to keep the api (userservice)  and database layers cleanly separated from the rest of the application
 //they could easily be split if necessary and run on separate servers.. we probably wont need to do that. \
 //dependencies
-var express = require('express'); //
-var router = express.Router();
-var request = require('request');
+var express = require('express'); //express
+var router = express.Router(); //express router
+var request = require('request'); //HTTP calls
 
 router.get('/', function(req, res) {
   //log user out
@@ -25,14 +25,16 @@ router.post('/', function(req, res){
     json: true
   }, function(error, response, body){
     if(error){
+      //go to login empty if there was an issue
       return res.render('login', {error: 'An error occured'});
     }
+    //if they arent authenticated meaning they didnt recieve thier token, they have an incorrect password
     if(!body.token){
       return res.render('login', {error: 'Username or password is incorrect'});
     }
     //save JWT token in the session to make it available to the app
     req.session.token = body.token;
-    //redirect to returnUrl
+    //redirect
     var returnURL = req.query.returnUrl && decodeURIComponenet(req.query.returnUrl) || '/';
     res.redirect(returnUrl);
   });
