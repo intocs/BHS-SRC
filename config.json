@@ -1,0 +1,5 @@
+{
+  "connectionString": "localhost:27017/BHS-SRC",
+  "apiUrl": "http://localhost:3000/api",
+  "secret": "I like cake"
+}
