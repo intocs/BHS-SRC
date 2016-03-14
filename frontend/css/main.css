@@ -1,41 +1,48 @@
-/*Known issues
-	-headerline style leaves slight margins to left and right of line
-*/
-
 html, body {
     font-family: helvetica, sans-serif;
-    background-color: #ffffff;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
 }
-
 h1 {
 	font-size: 3em;
 	color: #4A4A4A;
+	margin:0;
+}
+h2 {
+    font-size: 2.25em;
+    color: #4A4A4A;
+    margin:0;
 }
 
-.header{
-	margin: 5px;
+h3 {
+	margin:0;
 }
 
-.headerline{
-	height:3px;
-    padding:0px;
-    margin:0px;
-    background-color:#4A4A4A;
-    color:#4A4A4A;
+a  {
+	color: #D0021B;
+	text-decoration:none;
+}
+
+a:hover{
+	color: #920D10;
+	text-decoration: none;
+}
+
+/*Begin header styles*/
+
+.header {
+    margin: 5px;
+	font-size: 2.25em;
+	color: #4A4A4A;
+}
+
+.headerline {
+    height: 3px;
+    padding: 0;
+    margin: 0;
+    background-color: #4A4A4A;
+    color: #4A4A4A;
     border: 0 none;
-	-webkit-animation-name: expandright;
-	-webkit-animation-duration: 1.5s;
-	animation-name: expandright;
-	animation-duration: 1.5s;
 }
-
-/* For line under header, expanding from left to right*/
-
-@-webkit-keyframes expandright {
-	0%   {width:0%;}
-	100% {width:100%;}
-}
-@keyframes expandright {
-	0%   {width:0%;}
-	100% {width:100%;}
-}
+/*End header styles*/
