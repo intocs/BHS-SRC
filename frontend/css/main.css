@@ -63,15 +63,40 @@ a:hover{
     border-radius: 3px;
 }
 
-#logInButton {
+#logInButton, #signUpButton {
     background-color: inherit;
     border-width: 1.5px;
     color: #4A4A4A;
 }
 
-#signUpButton {
-    background-color: inherit;
-    border-width: 1.5px;
-    color: #4A4A4A;
-}
 /*End header styles*/
+
+/* Begin question styles */ /* TODO: MAKE THIS ACTUALLY DECENT */
+
+.questionListContainer {
+  margin-top: 2em;
+  position: absolute;
+  width: 50%;
+  left: calc(50% - (50% / 2));
+}
+
+.questionContainer {
+  margin-bottom: 2em;
+  border-bottom: 2px solid rgb(129, 129, 129);
+  padding: 0.5em;
+}
+
+.questionContainer .questionHeader {
+  margin: 0;
+}
+
+.questionContainer .questionSpec {
+  margin-top: 0;
+  margin-bottom: 2em;
+}
+
+.questionContainer .questionContent {
+  margin-left: 1em;
+}
+
+/* End question styles */

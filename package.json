@@ -4,9 +4,11 @@
   "description": "BHS science resource center website to help students contact alumni and various other things",
   "main": "server.js",
   "scripts": {
-    "build-test": "browserify -t [ babelify --presets [ es2015 react ] ] test/spec/frontendSpec.js | uglifyjs > test/spec/specBundle.js",
-    "build": "browserify -t [ babelify --presets [ es2015 react ] ] frontend/js/main.js -o frontend/dist/bundle.js",
-    "init": "npm install && npm run build && npm run build-test"
+    "front-build-test": "browserify -t [ babelify --presets [ es2015 react ] ] test/spec/frontendSpec.js | uglifyjs > test/spec/specBundle.js",
+    "front-build": "browserify -t [ babelify --presets [ es2015 react ] ] frontend/js/main.js -o frontend/dist/bundle.js",
+    "init": "npm install && npm run front-build && npm run front-build-test",
+
+    "front-build-daemon": "nodemon --watch frontend/js --exec \"npm run front-build\""
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,7 @@
   },
   "devDependencies": {
     "bower": "^1.7.7",
+    "nodemon": "^1.9.1",
     "uglify-js": "^2.6.2"
   }
 }

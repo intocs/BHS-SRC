@@ -1,0 +1,51 @@
+let React = require("react"), ReactDOM = require("react-dom");
+
+let QuestionObject = React.createClass({
+  // QuestionObject - ReactJS encapsulation of the HTML features associated
+  //  with a question being displayed on the page.
+
+  // render: returns the pseudo-HTML of a question.
+  render: function() {
+
+    // N.B. "className" is used to refer to the "class" of an HTML tag.
+    //  Because "class" is a reserved keyword in JS, ReactJS uses "className" instead.
+    return (
+      <div className="questionContainer">
+        <h3 className="questionHeader">{ this.props.data.question }</h3>
+        <h6 className="questionSpec">Answered by { this.props.data.responder }, { this.props.data.responderCredentials } | Asked by { this.props.data.asker }</h6>
+        <div className="questionContent">{ this.props.data.answer }</div>
+      </div>
+    );
+  }
+});
+
+let QuestionList = React.createClass({
+  // QuestionList - ReactJS encapsulation of the HTML features associated
+  //  with a list of questions being displayed on the page.
+
+  // render: returns the pseudo-HTML of a list of questions.
+
+  render: function() {
+
+    // Maps each element of "data" (which is a js object containing info abt
+    //  a comment) to a ReactJS class instance of the QuestionObject class.
+    //  each QuestionObject is a "data" value in accordance with whichever
+    //  comment object is is from.
+    let questionNodes = this.props.data.map( comment => (<QuestionObject data={comment} />) );
+
+    // (I like arrow functions. So sue me.)
+
+    // Return a simple div containing the question nodes
+    return (
+      <div className="questionListContainer">
+        { questionNodes }
+      </div>
+    );
+  }
+});
+
+// Export the QuestionList and QuestionObject classes so that the main js file can access them.
+module.exports = {
+  QuestionObject: QuestionObject,
+  QuestionList: QuestionList
+};
