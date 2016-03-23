@@ -12,7 +12,7 @@ let QuestionObject = React.createClass({
     return (
       <div className="questionContainer">
         <h3 className="questionHeader">{ this.props.data.question }</h3>
-        <h6 className="questionSpec">Answered by { this.props.data.responder }, { this.props.data.responderCredentials } | Asked by { this.props.data.asker }</h6>
+        <h5 className="questionSpec">Answered by { this.props.data.responder }, { this.props.data.responderCredentials } | Asked by { this.props.data.asker }</h5>
         <div className="questionContent">{ this.props.data.answer }</div>
       </div>
     );
