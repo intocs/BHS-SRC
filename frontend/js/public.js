@@ -11,7 +11,8 @@ let React = require("react"), ReactDOM = require("react-dom");
 //  (N.B. since QuestionComponents.js is "require"d, it is automatically bundled
 //  with the remainder of the code when it is compiled into bundle.js)
 let questionComponents = require("./questionComponents"),
-    testData = require("./testData");
+    testData = require("./testData"),
+    Modal = require("./modal").Modal;
 
 // Exports a function which will carry out appropriate initing for public.html
 module.exports = function () {
@@ -21,7 +22,19 @@ module.exports = function () {
       // Render a QuestionList containing the placeholder data
       ReactDOM.render(
           <questionComponents.QuestionList data={ testData.QUESTIONDATA } />,
-          $('div#questionContainer')[0]
+          document.querySelector("#questionContainer")
+      );
+
+      ReactDOM.render(
+          <Modal contentGenerator={ function(closeFunction) {
+            return (
+              <div className="modalContents">
+                This is a dank (c) modal<br/>
+                <button onClick={ closeFunction }>Close</button>
+              </div>
+            );
+          }} />,
+          document.querySelector("#modalContainer")
       );
   });
 };
