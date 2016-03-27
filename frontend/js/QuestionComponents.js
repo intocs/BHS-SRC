@@ -11,9 +11,9 @@ let QuestionObject = React.createClass({
     //  Because "class" is a reserved keyword in JS, ReactJS uses "className" instead.
     return (
       <div className="questionContainer">
-        <h3 className="questionHeader">{ this.props.data.question }</h3>
-        <h5 className="questionSpec">Answered by { this.props.data.responder }, { this.props.data.responderCredentials } | Asked by { this.props.data.asker }</h5>
-        <div className="questionContent">{ this.props.data.answer }</div>
+        <h3 className="questionHeader">{ this.props.questionData.question }</h3>
+        <h5 className="questionSpec">Answered by { this.props.questionData.responder }, { this.props.questionData.responderCredentials } | Asked by { this.props.questionData.asker }</h5>
+        <div className="questionContent">{ this.props.questionData.answer }</div>
       </div>
     );
   }
@@ -31,7 +31,7 @@ let QuestionList = React.createClass({
     //  a comment) to a ReactJS class instance of the QuestionObject class.
     //  each QuestionObject is a "data" value in accordance with whichever
     //  comment object is is from.
-    let questionNodes = this.props.data.map( comment => (<QuestionObject data={comment} />) );
+    let questionNodes = this.props.questionDataList.map( comment => (<QuestionObject questionData={comment} />) );
 
     // (I like arrow functions. So sue me.)
 

@@ -19,22 +19,49 @@ module.exports = function () {
   window.addEventListener("load", function() {
       // Run this code when the window initially loads
 
-      // Render a QuestionList containing the placeholder data
-      ReactDOM.render(
-          <questionComponents.QuestionList data={ testData.QUESTIONDATA } />,
-          document.querySelector("#questionContainer")
-      );
+      class App extends React.Component {
 
-      ReactDOM.render(
-          <Modal contentGenerator={ function(closeFunction) {
-            return (
-              <div className="modalContents">
-                This is a dank (c) modal<br/>
-                <button onClick={ closeFunction }>Close</button>
+        constructor(props) {
+          super(props);
+          this.state = {
+            "signupModalOpen": false,
+            "loginModalOpen": false
+          };
+        }
+
+        openSignupModal()  { this.setState({"signupModalOpen": true }); }
+        closeSignupModal() { this.setState({"signupModalOpen": false}); }
+
+        openLoginModal()  { this.setState({"loginModalOpen": true }); }
+        closeLoginModal() { this.setState({"loginModalOpen": false}); }
+
+        render() {
+          return (
+            <div className="app">
+              <div className={"appContent" + (this.state.signupModalOpen || this.state.loginModalOpen ? " blurred" : "")}>
+                <header>
+                  <h1 className="pageHeader">BHS Science Career Center</h1>
+                  <button id="logInButton" className="headerButton" onClick={ this.openLoginModal.bind(this) }>Log In</button>
+                  <button id="signUpButton" className="headerButton" onClick={ this.openSignupModal.bind(this) }>Sign Up</button>
+                  <hr className="headerLine" />
+                </header>
+                <div id="questionContainer">
+                  <questionComponents.QuestionList questionDataList={ testData.QUESTIONDATA } />
+                </div>
               </div>
-            );
-          }} />,
-          document.querySelector("#modalContainer")
-      );
+              <Modal isOpen={ this.state.signupModalOpen }>
+                Sign Up Stuffs<br/>
+                <button onClick={ this.closeSignupModal.bind(this) }>Close</button>
+              </Modal>
+              <Modal isOpen={ this.state.loginModalOpen }>
+                Log In Stuffs<br/>
+                <button onClick={ this.closeLoginModal.bind(this) }>Close</button>
+              </Modal>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App/>, document.querySelector("#appContainer"));
   });
 };
