@@ -12,7 +12,9 @@ let React = require("react"), ReactDOM = require("react-dom");
 //  with the remainder of the code when it is compiled into bundle.js)
 let questionComponents = require("./questionComponents"),
     testData = require("./testData"),
-    Modal = require("./modal").Modal;
+    modals = require("./modal"),
+    Modal = modals.Modal,
+    LoginModal = modals.LoginModal;
 
 // Exports a function which will carry out appropriate initing for public.html
 module.exports = function () {
@@ -53,10 +55,7 @@ module.exports = function () {
                 Sign Up Stuffs<br/>
                 <button onClick={ this.closeSignupModal.bind(this) }>Close</button>
               </Modal>
-              <Modal isOpen={ this.state.loginModalOpen }>
-                Log In Stuffs<br/>
-                <button onClick={ this.closeLoginModal.bind(this) }>Close</button>
-              </Modal>
+              <LoginModal isOpen={ this.state.loginModalOpen } onLoggingIn={ this.closeLoginModal.bind(this) }/>
             </div>
           );
         }

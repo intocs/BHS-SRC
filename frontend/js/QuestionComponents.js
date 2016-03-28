@@ -31,7 +31,7 @@ let QuestionList = React.createClass({
     //  a comment) to a ReactJS class instance of the QuestionObject class.
     //  each QuestionObject is a "data" value in accordance with whichever
     //  comment object is is from.
-    let questionNodes = this.props.questionDataList.map( comment => (<QuestionObject questionData={comment} />) );
+    let questionNodes = this.props.questionDataList.map( questionData => (<QuestionObject questionData={questionData} />) );
 
     // (I like arrow functions. So sue me.)
 

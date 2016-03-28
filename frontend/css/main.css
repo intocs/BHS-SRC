@@ -4,6 +4,9 @@ html, body {
     margin: 0;
     padding: 0;
 }
+*:focus {
+    outline: none;
+}
 h1 {
 	font-size: 3em;
 	color: #4A4A4A;
@@ -33,15 +36,19 @@ a:hover{
 
 
 .appContent {
-  transition: filter 0.2s;
+  transition: 0.3s filter linear;
+  -webkit-transition: 0.3s -webkit-filter linear;
+  -moz-transition: 0.3s -moz-filter linear;
+  -ms-transition: 0.3s -ms-filter linear;
+  -o-transition: 0.3s -o-filter linear;
 }
 
 
 /*Begin header styles*/
 
 .pageHeader {
-    display: inline-block;
-    margin: 5px;
+  display: inline-block;
+  margin: 5px;
 	font-size: 2.25em;
 	color: #4A4A4A;
 }
@@ -123,19 +130,25 @@ a:hover{
 
 .modalContainer {
   position: absolute;
-  width: 50%;
-  height: 50%;
-  left: calc(50% - (50% / 2));
-  top: calc(50% - (50% / 2));
+
   border: 0.3em solid black;
-  background-color: white;
   padding: 1em;
-  opacity: 1;
+
+  width: calc(37% - (0.3em + 1em) * 2);
+  min-width: 300px;
+  height: calc(50% - (0.3em + 1em) * 2);
+  min-height: 300px;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1.0);
+
+  background-color: white;
 }
 
 .modal-anim-enter.modalBlurFilter {
   opacity: 0.00;
-  transition: opacity 0.2s;
+  transition: all 0.3s;
 }
 
 .modal-anim-enter-active.modalBlurFilter {
@@ -144,16 +157,18 @@ a:hover{
 
 .modal-anim-enter.modalContainer {
   opacity: 0.00;
-  transition: opacity 0.2s;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: all 0.3s;
 }
 
 .modal-anim-enter-active.modalContainer {
+  transform: translate(-50%, -50%) scale(1.0);
   opacity: 1;
 }
 
 .modal-anim-leave.modalBlurFilter {
   opacity: 0.5;
-  transition: opacity 0.2s;
+  transition: all 0.3s;
 }
 
 .modal-anim-leave-active.modalBlurFilter {
@@ -162,12 +177,43 @@ a:hover{
 
 .modal-anim-leave.modalContainer {
   opacity: 1;
-  transition: opacity 0.2s;
+  transform: translate(-50%, -50%) scale(1.0);
+  transition: all 0.3s;
 }
 
 .modal-anim-leave-active.modalContainer {
   opacity: 0.0;
+  transform: translate(-50%, -50%) scale(0.8);
 }
 
+.modal-header {
+  display: inline-block;
+  margin: 5px;
+  margin-bottom: 15px;
+  font-size: 2.25em;
+  color: #4A4A4A;
+}
+
+.modal-input {
+  padding: 5px;
+  border: 1px solid #BDBDBD;
+  margin: 7px 0 7px 0;
+  width: calc(100% - (5px + 1px) * 2);
+}
+
+.modal-button {
+    display: inline-block;
+
+    border: 1px solid #4A4A4A;
+    margin: 7px 0 7px 0;
+
+    height: 2.25em;
+    width: calc(100%);
+
+    color: #4A4A4A;
+
+    background-color: #FFF;
+    border-radius: 3px;
+}
 
 /* End modal styles */
