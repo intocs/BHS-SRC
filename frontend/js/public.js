@@ -14,7 +14,8 @@ let questionComponents = require("./questionComponents"),
     testData = require("./testData"),
     modals = require("./modal"),
     Modal = modals.Modal,
-    LoginModal = modals.LoginModal;
+    LoginModal = modals.LoginModal,
+    SignupModal = modals.SignupModal;
 
 // Exports a function which will carry out appropriate initing for public.html
 module.exports = function () {
@@ -51,11 +52,14 @@ module.exports = function () {
                   <questionComponents.QuestionList questionDataList={ testData.QUESTIONDATA } />
                 </div>
               </div>
-              <Modal isOpen={ this.state.signupModalOpen }>
-                Sign Up Stuffs<br/>
-                <button onClick={ this.closeSignupModal.bind(this) }>Close</button>
-              </Modal>
-              <LoginModal isOpen={ this.state.loginModalOpen } onLoggingIn={ this.closeLoginModal.bind(this) }/>
+              <SignupModal isOpen={ this.state.signupModalOpen }
+                onSigningUp={ this.closeSignupModal.bind(this) }
+                onClosing={ this.closeSignupModal.bind(this) }
+                onSwitchingToLogin={ (function() { this.closeSignupModal(); this.openLoginModal(); }).bind(this) } />
+              <LoginModal isOpen={ this.state.loginModalOpen }
+                onLoggingIn={ this.closeLoginModal.bind(this) }
+                onClosing={ this.closeLoginModal.bind(this) }
+                onSwitchingToSignup={ (function() { this.closeLoginModal(); this.openSignupModal(); }).bind(this) } />
             </div>
           );
         }

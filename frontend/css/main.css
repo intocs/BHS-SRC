@@ -189,16 +189,38 @@ a:hover{
 .modal-header {
   display: inline-block;
   margin: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   font-size: 2.25em;
   color: #4A4A4A;
+}
+
+.modal-hr {
+  margin: 4px 0 4px 0;
+}
+
+.modal-subheader {
+  display: inline-block;
+  margin: 5px;
+  font-size: 1.00em;
+  color: #4A4A4A;
+  margin-bottom: 0;
 }
 
 .modal-input {
   padding: 5px;
   border: 1px solid #BDBDBD;
-  margin: 7px 0 7px 0;
+  margin: 4px 0 4px 0;
   width: calc(100% - (5px + 1px) * 2);
+}
+
+.modal-input-first-name {
+  width: calc(50% - (5px + 1px) * 2 - 4px);
+  margin-right: 4px;
+}
+
+.modal-input-last-name {
+  width: calc(50% - (5px + 1px) * 2 - 4px);
+  margin-left: 4px;
 }
 
 .modal-button {
@@ -208,12 +230,35 @@ a:hover{
     margin: 7px 0 7px 0;
 
     height: 2.25em;
-    width: calc(100%);
+    width: 100%;
 
     color: #4A4A4A;
 
     background-color: #FFF;
     border-radius: 3px;
+}
+
+.modal-close-button {
+  position: absolute;
+
+  border: 0px solid black;
+  color: #4A4A4A;
+  background-color: white;
+  font: 40px/100% arial, sans-serif;
+  text-decoration: none;
+
+  top: 25px;
+  right: 25px;
+  width: 20px;
+  height: 20px;
+
+  padding: 0px;
+  line-height: 25px;
+
+}
+
+.modal-close-button:after {
+  content: "✖";
 }
 
 /* End modal styles */
