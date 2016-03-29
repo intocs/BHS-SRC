@@ -1,0 +1,75 @@
+
+/* Begin search bar styles */
+.searchbar-container {
+  position: relative;
+  margin: 7px;
+  width: calc(70% - 7px * 2);
+  left: calc(50% - (70% / 2));
+}
+
+.searchbar-container > table {
+  border-spacing: 0;
+  width: 100%;
+}
+
+.searchbar-container tr {
+  height: 100%;
+}
+
+.searchbar-container td {
+  padding: 0;
+  height: 100%
+}
+.searchbar-container td:last-child {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.searchbar-input {
+  border: 1px solid #BDBDBD;
+
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+
+  padding: 5px;
+  width: calc(100% - (5px + 1px) * 2);
+
+}
+
+.searchbar-button {
+  border: 1px solid #BDBDBD;
+  border-left: none;
+
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+
+  background-color: white;
+  height: 100%;
+  width: 70px;
+}
+
+/* End search bar styles */
+
+/* Begin user dropdown styles */
+
+.dropdown-mainbutton {
+  display: block;
+  position: absolute;
+  right: 20px;
+  top: 15px
+}
+
+.dropdown-opttablecontainer {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+}
+
+.dropdown-opttable {
+  background-color: white;
+  width: 100%;
+  border: 1px solid black;
+}
+
+/* End user dropdown styles */

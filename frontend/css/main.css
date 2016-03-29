@@ -7,6 +7,13 @@ html, body {
 *:focus {
     outline: none;
 }
+.blurred {
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
 h1 {
 	font-size: 3em;
 	color: #4A4A4A;
@@ -34,6 +41,9 @@ a:hover{
 	text-decoration: none;
 }
 
+header {
+  position: relative;
+}
 
 .appContent {
   transition: 0.3s filter linear;
@@ -226,7 +236,8 @@ a:hover{
 .modal-button {
     display: inline-block;
 
-    border: 1px solid #4A4A4A;
+    border: 1px solid black;
+
     margin: 7px 0 7px 0;
 
     height: 2.25em;
@@ -241,7 +252,8 @@ a:hover{
 .modal-close-button {
   position: absolute;
 
-  border: 0px solid black;
+  border: none;
+
   color: #4A4A4A;
   background-color: white;
   font: 40px/100% arial, sans-serif;
@@ -252,7 +264,7 @@ a:hover{
   width: 20px;
   height: 20px;
 
-  padding: 0px;
+  padding: 0;
   line-height: 25px;
 
 }

@@ -11,11 +11,13 @@ let React = require("react"), ReactDOM = require("react-dom");
 //  (N.B. since QuestionComponents.js is "require"d, it is automatically bundled
 //  with the remainder of the code when it is compiled into bundle.js)
 let questionComponents = require("./questionComponents"),
+    QuestionList = questionComponents.QuestionList,
     testData = require("./testData"),
     modals = require("./modal"),
     Modal = modals.Modal,
     LoginModal = modals.LoginModal,
-    SignupModal = modals.SignupModal;
+    SignupModal = modals.SignupModal,
+    Header = require("./header").Header;
 
 // Exports a function which will carry out appropriate initing for public.html
 module.exports = function () {
@@ -42,14 +44,12 @@ module.exports = function () {
           return (
             <div className="app">
               <div className={"appContent" + (this.state.signupModalOpen || this.state.loginModalOpen ? " blurred" : "")}>
-                <header>
-                  <h1 className="pageHeader">BHS Science Career Center</h1>
+                <Header>
                   <button id="logInButton" className="headerButton" onClick={ this.openLoginModal.bind(this) }>Log In</button>
                   <button id="signUpButton" className="headerButton" onClick={ this.openSignupModal.bind(this) }>Sign Up</button>
-                  <hr className="headerLine" />
-                </header>
+                </Header>
                 <div id="questionContainer">
-                  <questionComponents.QuestionList questionDataList={ testData.QUESTIONDATA } />
+                  <QuestionList questionDataList={ testData.QUESTIONDATA } />
                 </div>
               </div>
               <SignupModal isOpen={ this.state.signupModalOpen }
