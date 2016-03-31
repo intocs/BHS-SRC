@@ -13,6 +13,13 @@ html, body {
   -o-filter: blur(2px);
   -ms-filter: blur(2px);
   filter: blur(2px);
+  overflow: hidden;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 h1 {
 	font-size: 3em;
