@@ -39,7 +39,7 @@ class LoginModal extends React.Component {
         <input type="text" className="modal-input" placeholder="Password" />
         <button className="modal-button" onClick={ this.props.onLoggingIn }>Log in</button>
         <hr className="modal-hr" />
-        <h6 className="modal-subheader">Have an account?</h6>
+        <h6 className="modal-subheader">Don't have an account?</h6>
         <button className="modal-button" onClick={ this.props.onSwitchingToSignup }>Create an account</button>
       </Modal>
     );
