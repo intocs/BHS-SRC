@@ -2,9 +2,9 @@
 let React = require("react"), ReactDOM = require("react-dom");
 let ReactCSSTransitionGroup = require("react-addons-css-transition-group");
 
+
 class Modal extends React.Component {
   render() {
-
     if (this.props.isOpen) {
       return (
         <ReactCSSTransitionGroup transitionName="modal-anim" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
@@ -14,8 +14,9 @@ class Modal extends React.Component {
           </div>
         </ReactCSSTransitionGroup>
       );
-    } else return (
-      <ReactCSSTransitionGroup transitionName="modal-anim" transitionEnterTimeout={300} transitionLeaveTimeout={300} />
+    } else 
+        return (
+        <ReactCSSTransitionGroup transitionName="modal-anim" transitionEnterTimeout={300} transitionLeaveTimeout={300} />
     );
   }
 }

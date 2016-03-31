@@ -19,9 +19,20 @@ let questionComponents = require("./questionComponents"),
     SignupModal = modals.SignupModal,
     Header = require("./header").Header;
 
+function disableScrolling(){
+    var x=window.scrollX;
+    var y=window.scrollY;
+    window.onscroll=function(){window.scrollTo(x, y);};
+}
+
+function enableScrolling(){
+    window.onscroll=function(){};
+}
+
 // Exports a function which will carry out appropriate initing for public.html
 module.exports = function () {
   window.addEventListener("load", function() {
+
       // Run this code when the window initially loads
 
       class App extends React.Component {
@@ -34,12 +45,24 @@ module.exports = function () {
           };
         }
 
-        openSignupModal()  { this.setState({"signupModalOpen": true }); }
-        closeSignupModal() { this.setState({"signupModalOpen": false}); }
+        openSignupModal()  {
+            disableScrolling();
+            this.setState({"signupModalOpen": true });
+        }
+        closeSignupModal() {
+            enableScrolling();
+            this.setState({"signupModalOpen": false});
+        }
 
-        openLoginModal()  { this.setState({"loginModalOpen": true }); }
-        closeLoginModal() { this.setState({"loginModalOpen": false}); }
-
+        openLoginModal()  {
+            disableScrolling();
+            this.setState({"loginModalOpen": true });
+        }
+        closeLoginModal() {
+            enableScrolling();
+            this.setState({"loginModalOpen": false});
+        }
+        
         render() {
           return (
             <div className="app">

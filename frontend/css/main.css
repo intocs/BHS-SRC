@@ -3,6 +3,7 @@ html, body {
     background-color: #fff;
     margin: 0;
     padding: 0;
+    overflow: auto;
 }
 *:focus {
     outline: none;
@@ -146,9 +147,9 @@ header {
 }
 
 .modalContainer {
-  position: absolute;
+  position: fixed;
 
-  border: 0.3em solid black;
+  border: 0.3em solid white;
   padding: 1em;
 
   width: calc(37% - (0.3em + 1em) * 2);
