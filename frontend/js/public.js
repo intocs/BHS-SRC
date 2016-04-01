@@ -20,13 +20,13 @@ let questionComponents = require("./questionComponents"),
     Header = require("./header").Header;
 
 function disableScrolling(){
-    var x=window.scrollX;
-    var y=window.scrollY;
-    window.onscroll=function(){window.scrollTo(x, y);};
+    let x = window.scrollX,
+        y = window.scrollY;
+    window.onscroll = window.scrollTo.bind(window, x, y);
 }
 
 function enableScrolling(){
-    window.onscroll=function(){};
+    window.onscroll = function(){};
 }
 
 // Exports a function which will carry out appropriate initing for public.html
@@ -62,7 +62,7 @@ module.exports = function () {
             enableScrolling();
             this.setState({"loginModalOpen": false});
         }
-        
+
         render() {
           return (
             <div className="app">
