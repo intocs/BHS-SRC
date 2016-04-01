@@ -8,7 +8,7 @@ class Modal extends React.Component {
     if (this.props.isOpen) {
       return (
         <ReactCSSTransitionGroup transitionName="modal-anim" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
-          <div className="modalBlurFilter"></div>
+          <div className="modalBlurFilter" onClick={ this.props.onClosed }></div>
           <div className="modalContainer">
             { this.props.children }
           </div>
@@ -22,18 +22,20 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-  "isOpen": React.PropTypes.bool
+  "isOpen": React.PropTypes.bool,
+  "onClosed": React.PropTypes.func
 };
 
 Modal.defaultProps = {
-  "isOpen": false
+  "isOpen": false,
+  "onClosed": function(){}
 };
 
 
 class LoginModal extends React.Component {
   render() {
     return (
-      <Modal isOpen={ this.props.isOpen } ref="internalModal">
+      <Modal isOpen={ this.props.isOpen } ref="internalModal" onClosed={ this.props.onClosing }>
         <h1 className="modal-header">Log in</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
         <input type="text" className="modal-input" placeholder="Email" />
@@ -64,7 +66,7 @@ LoginModal.defaultProps = {
 class SignupModal extends React.Component {
   render() {
     return (
-      <Modal isOpen={ this.props.isOpen } ref="internalModal">
+      <Modal isOpen={ this.props.isOpen } ref="internalModal" onClosed={this.props.onClosing}>
         <h1 className="modal-header">Sign up</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
         <input type="text" className="modal-input" placeholder="Authentication code" />
