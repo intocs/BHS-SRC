@@ -8,6 +8,9 @@ html, body {
 *:focus {
     outline: none;
 }
+button {
+  cursor: pointer;
+}
 .blurred {
   -webkit-filter: blur(2px);
   -moz-filter: blur(2px);

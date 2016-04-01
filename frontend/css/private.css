@@ -31,7 +31,7 @@
 .searchbar-searchicon {
 
   border: 1px solid #BDBDBD;
-  background-color: #E4E4E4;
+  background-color: #f0f0f0;
 
   border-right: none;
   border-bottom-left-radius: 4px;
@@ -49,6 +49,7 @@
 
 .searchbar-input {
   border: 1px solid #BDBDBD;
+  background-color: #f0f0f0;
   border-left: none;
   border-right: none;
 

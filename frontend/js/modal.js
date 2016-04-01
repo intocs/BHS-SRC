@@ -14,7 +14,7 @@ class Modal extends React.Component {
           </div>
         </ReactCSSTransitionGroup>
       );
-    } else 
+    } else
         return (
         <ReactCSSTransitionGroup transitionName="modal-anim" transitionEnterTimeout={300} transitionLeaveTimeout={300} />
     );
@@ -28,14 +28,14 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   "isOpen": false,
-  "onClosed": function(){}
+  "onClosed": function() {}
 };
 
 
 class LoginModal extends React.Component {
   render() {
     return (
-      <Modal isOpen={ this.props.isOpen } ref="internalModal" onClosed={ this.props.onClosing }>
+      <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing } ref="internalModal">
         <h1 className="modal-header">Log in</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
         <input type="text" className="modal-input" placeholder="Email" />
@@ -66,7 +66,7 @@ LoginModal.defaultProps = {
 class SignupModal extends React.Component {
   render() {
     return (
-      <Modal isOpen={ this.props.isOpen } ref="internalModal" onClosed={this.props.onClosing}>
+      <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing } ref="internalModal">
         <h1 className="modal-header">Sign up</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
         <input type="text" className="modal-input" placeholder="Authentication code" />
