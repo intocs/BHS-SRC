@@ -31,3 +31,8 @@ NPM Run Scripts:
 | ``` npm run front-build ``` | Compiles and bundles JS code. |
 | ``` npm run front-build-daemon ``` | Starts daemon to automatically bundle code whenever a relevant file is modified |
 | ``` npm run front-build-test ``` | Compiles and bundles JS code for testing. |
+
+Installing MongoDB:
+-------------------
+
+Follow [the instructions here](https://docs.mongodb.org/v3.0/tutorial/install-mongodb-on-os-x/ "MongoDB Installation Tutorial") to install MongoDB to on your computer. (N.B. don't install with homebrew -- it will probably make you sad. This technique will also work for Linux I believe.)
