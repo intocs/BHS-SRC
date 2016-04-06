@@ -34,14 +34,6 @@ Modal.defaultProps = {
 
 class LoginModal extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      "email": "",
-      "password": ""
-    };
-  }
-
   render() {
     return (
       <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing } ref="internalModal">
