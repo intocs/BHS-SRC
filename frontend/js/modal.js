@@ -33,14 +33,23 @@ Modal.defaultProps = {
 
 
 class LoginModal extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      "email": "",
+      "password": ""
+    };
+  }
+
   render() {
     return (
       <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing } ref="internalModal">
         <h1 className="modal-header">Log in</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
-        <input type="text" className="modal-input" placeholder="Email" />
-        <input type="text" className="modal-input" placeholder="Password" />
-        <button className="modal-button" onClick={ this.props.onLoggingIn }>Log in</button>
+        <input type="text" ref="email-input" className="modal-input" placeholder="Email" />
+        <input type="text" ref="password-input" className="modal-input" placeholder="Password" />
+        <button className="modal-button" onClick={ () => {this.props.onLoggingIn(this.refs["email-input"].value, this.refs["password-input"].value); } }>Log in</button>
         <hr className="modal-hr" />
         <h6 className="modal-subheader">Don't have an account?</h6>
         <button className="modal-button" onClick={ this.props.onSwitchingToSignup }>Create an account</button>

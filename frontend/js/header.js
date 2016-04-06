@@ -36,14 +36,14 @@ class UserDropdown extends React.Component {
         <div className="dropdown-mainbutton" onClick={ this.showDropdown.bind(this) }>Hi { this.props.username }! <i className="fa fa-chevron-down"></i></div>
       );
     } else {
-      let options = ["foo", "bar", "baz"]; // TODO: get from props or something
-      let optHtml = options.map(opt => (<tr><td>{ opt }</td></tr>));
       return (
         <div className="dropdown-mainbutton" onClick={ this.hideDropdown.bind(this) }>
           Hi { this.props.username }! <i className="fa fa-chevron-down"></i>
           <div className="dropdown-opttablecontainer">
             <table className="dropdown-opttable"><tbody>
-                { optHtml }
+                <tr><td onClick={ this.props.onLogOut }>Log out</td></tr>
+                <tr><td>Thing #1</td></tr>
+                <tr><td>Thing #2</td></tr>
             </tbody></table>
           </div>
         </div>

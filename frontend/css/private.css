@@ -94,14 +94,30 @@
 .dropdown-opttablecontainer {
   position: absolute;
   top: 20px;
-  left: 0;
-  width: 100%;
+  right: 0;
+  width: 130px;
 }
 
 .dropdown-opttable {
   background-color: white;
-  width: 100%;
-  border: 1px solid black;
+  width: 130px;
+  border: 1px solid rgb(110, 110, 110);
+  border-spacing: 0;
+}
+
+.dropdown-opttable td {
+  padding: 8px;
+  border-bottom: 1px solid rgb(110, 110, 110);
+  background-color: rgb(161, 161, 161);
+  transition: background-color 0.4s;
+}
+
+.dropdown-opttable td:hover {
+  background-color: rgb(136, 136, 136);
+}
+
+.dropdown-opttable tr:last-child td {
+  border-bottom: none;
 }
 
 /* End user dropdown styles */
