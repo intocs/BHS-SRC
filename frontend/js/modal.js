@@ -40,13 +40,19 @@ class LoginModal extends React.Component {
         <h1 className="modal-header">Log in</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
         <input type="text" ref="email-input" className="modal-input" placeholder="Email" />
-        <input type="text" ref="password-input" className="modal-input" placeholder="Password" />
+        <input type="password" ref="password-input" className="modal-input" placeholder="Password" />
         <button className="modal-button" onClick={ () => {this.props.onLoggingIn(this.refs["email-input"].value, this.refs["password-input"].value); } }>Log in</button>
         <hr className="modal-hr" />
         <h6 className="modal-subheader">Don't have an account?</h6>
         <button className="modal-button" onClick={ this.props.onSwitchingToSignup }>Create an account</button>
       </Modal>
     );
+  }
+  
+  componentDidUpdate() {
+      if (this.props.isOpen) {
+          this.refs["email-input"].focus();
+      }
   }
 }
 
@@ -70,7 +76,7 @@ class SignupModal extends React.Component {
       <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing } ref="internalModal">
         <h1 className="modal-header">Sign up</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
-        <input type="text" className="modal-input" placeholder="Authentication code" />
+        <input type="text" className="modal-input" placeholder="Authentication code" ref="authentication-input" />
         <input type="text" className="modal-input modal-input-first-name" placeholder="First name" />
         <input type="text" className="modal-input modal-input-last-name" placeholder="Last name" />
         <input type="text" className="modal-input" placeholder="Email address (non-bsd preferable)" />
@@ -83,6 +89,13 @@ class SignupModal extends React.Component {
       </Modal>
     );
   }
+  
+  componentDidUpdate() {
+      if (this.props.isOpen) {
+          this.refs["authentication-input"].focus();
+      }
+  }
+  
 }
 
 SignupModal.propTypes ={
