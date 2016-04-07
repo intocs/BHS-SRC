@@ -1,5 +1,9 @@
+// searchBar.js - contains the searchbar and associated functions
+
+// Require the thing
 let React = require("react");
 
+// SearchBar - a class that encapsulates our beautiful searchbar
 class SearchBar extends React.Component {
   render() {
     return (

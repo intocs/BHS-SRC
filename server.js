@@ -1,4 +1,6 @@
-//importing modules and setting port ======================================================================
+// server.js - the main server file. Run this when you want to do tests!
+
+// Require the things
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
@@ -8,43 +10,39 @@ var jwt = require('jsonwebtoken');
 
 var User = require('./server/models/user');
 
+// Initialize the app
 var app = express();
 
+// set the port (for debugging and permissions purpose, avoid 80, the default port)
 const PORT = 8000;
 
-//configuration ===========================================================================================
-//our db
-// var db = require('./config.js');
-//once we have a db we can connect to we put that here..
+// Connect to the db
 mongoose.connect('mongodb://localhost/bhssrc');
-// configure app to use bodyParser()
-// this will let us get the data from a POST
+
+// Tell the Express app to use BodyParser, which allows for easy parsing of POST requests
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Configure the request handler to automatically deal with JWT tokens, which are used for authentication
 app.use(expressJWT({ secret: "5o0pers3ecr3tl33t", credentialsRequired: false}).unless({ path: ['/api'] }));
 
-
+// Use some static files (js and css)
 app.use('/static/js', express.static("./frontend/dist/"));
 app.use('/static/js', express.static("./frontend/static/"));
 app.use('/static/css', express.static("./frontend/css/"));
 
-//routes ==================================================================================================
-//we should move this to a different frontend file so we avoid having backend and frontend in the same file
-//replace with a reference to a file called "routes" and pass in our app
-//then we can use: require('/routes')(app);
+// Route for default page
+//  TODO: move this to a different file or something.
 app.get('/', (req, res) => {
   res.sendFile("mainPage.html", {
     root: "./frontend"
   });
 });
 
-
+// All of the routes for the users API
 require("./server/api/users")("/api/users", app);
 
-
-//start the app ===========================================================================================
+// Tell the Express App to start listening
 app.listen(PORT, () => {
-    console.log(`im listening on port:  ${ PORT }`);
+    console.log(`Listening on Port: ${ PORT }`);
 });

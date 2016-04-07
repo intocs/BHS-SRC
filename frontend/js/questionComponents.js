@@ -1,4 +1,4 @@
-let React = require("react"), ReactDOM = require("react-dom");
+let React = require("react");
 
 let QuestionObject = React.createClass({
   // QuestionObject - ReactJS encapsulation of the HTML features associated

@@ -1,12 +1,12 @@
 html, body {
-    font-family: helvetica, sans-serif;
-    background-color: #fff;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
+  font-family: helvetica, sans-serif;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
 }
 *:focus {
-    outline: none;
+  outline: none;
 }
 button {
   cursor: pointer;
@@ -18,7 +18,6 @@ button {
   -ms-filter: blur(2px);
   filter: blur(2px);
   overflow: hidden;
-
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -26,36 +25,31 @@ button {
   user-select: none;
 }
 h1 {
-	font-size: 3em;
-	color: #4A4A4A;
-	margin:0;
+  font-size: 3em;
+  color: #4A4A4A;
+  margin: 0;
 }
 h2 {
-    font-size: 2.25em;
-    color: #4A4A4A;
-    margin:0;
+  font-size: 2.25em;
+  color: #4A4A4A;
+  margin: 0;
 }
-
 h3 {
-	margin:0;
+  margin: 0;
   font-size: 1.75em;
   color: #2a2a2a;
 }
-
-a  {
-	color: #D0021B;
-	text-decoration:none;
+a {
+  color: #D0021B;
+  text-decoration: none;
 }
-
-a:hover{
-	color: #920D10;
-	text-decoration: none;
+a:hover {
+  color: #920D10;
+  text-decoration: none;
 }
-
 header {
   position: relative;
 }
-
 .appContent {
   transition: 0.3s filter linear;
   -webkit-transition: 0.3s -webkit-filter linear;
@@ -64,50 +58,49 @@ header {
   -o-transition: 0.3s -o-filter linear;
 }
 
-
 /*Begin header styles*/
 
 .pageHeader {
   display: inline-block;
   margin: 5px;
-	font-size: 2.25em;
-	color: #4A4A4A;
+  font-size: 2.25em;
+  color: #4A4A4A;
 }
-
 .headerLine {
-    height: 3px;
-    padding: 0;
-    margin: 0;
-    background-color: #4A4A4A;
-    color: #4A4A4A;
-    border: 0 none;
+  height: 3px;
+  padding: 0;
+  margin: 0;
+  background-color: #4A4A4A;
+  color: #4A4A4A;
+  border: 0 none;
 }
-
 .headerButton {
-    display: inline-block;
-    float: right;
-    margin-top: calc(.5em + 5px);
-    margin-bottom: calc(.5em + 0px);
-    margin-right: 1em;
-    height: 2.25em;
-    border-style: solid;
-    border-radius: 3px;
+  display: inline-block;
+  float: right;
+  margin-top: calc(.5em + 5px);
+  margin-bottom: calc(.5em + 0px);
+  margin-right: 1em;
+  height: 2.25em;
+  border-style: solid;
+  border-radius: 3px;
 }
-
 .headerButton:active {
-    background-color: black;
-    border-radius: 3px;
+  background-color: black;
+  border-radius: 3px;
 }
-
 #logInButton, #signUpButton {
-    background-color: inherit;
-    border-width: 1.5px;
-    color: #4A4A4A;
+  background-color: inherit;
+  border-width: 1.5px;
+  color: #4A4A4A;
 }
 
 /*End header styles*/
 
-/* Begin question styles */ /* TODO: MAKE THIS ACTUALLY DECENT */
+
+/* Begin question styles */
+
+
+/* TODO: MAKE THIS ACTUALLY DECENT */
 
 .questionListContainer {
   margin-top: 2em;
@@ -115,29 +108,27 @@ header {
   width: 70%;
   left: calc(50% - (70% / 2));
 }
-
 .questionContainer {
   margin-bottom: 2em;
   border-bottom: 2px solid rgb(129, 129, 129);
   padding: 0.5em;
 }
-
 .questionContainer .questionHeader {
   margin: 0;
 }
-
 .questionContainer .questionSpec {
   margin-top: 0;
   margin-bottom: 1.5em;
 }
-
 .questionContainer .questionContent {
   margin-left: 1em;
 }
 
 /* End question styles */
 
+
 /* Begin modal styles */
+
 .modalBlurFilter {
   position: absolute;
   left: 0;
@@ -146,67 +137,52 @@ header {
   height: 100%;
   background-color: rgb(0, 0, 0);
   opacity: 0.5;
-
 }
-
 .modalContainer {
   position: fixed;
-
   border: 0.3em solid white;
   padding: 1em;
-
   width: calc(37% - (0.3em + 1em) * 2);
   min-width: 300px;
   height: calc(50% - (0.3em + 1em) * 2);
   min-height: 300px;
-
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) scale(1.0);
-
   background-color: white;
 }
-
 .modal-anim-enter.modalBlurFilter {
   opacity: 0.00;
   transition: all 0.3s;
 }
-
 .modal-anim-enter-active.modalBlurFilter {
   opacity: 0.5;
 }
-
 .modal-anim-enter.modalContainer {
   opacity: 0.00;
   transform: translate(-50%, -50%) scale(0.8);
   transition: all 0.3s;
 }
-
 .modal-anim-enter-active.modalContainer {
   transform: translate(-50%, -50%) scale(1.0);
   opacity: 1;
 }
-
 .modal-anim-leave.modalBlurFilter {
   opacity: 0.5;
   transition: all 0.3s;
 }
-
 .modal-anim-leave-active.modalBlurFilter {
   opacity: 0.0;
 }
-
 .modal-anim-leave.modalContainer {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1.0);
   transition: all 0.3s;
 }
-
 .modal-anim-leave-active.modalContainer {
   opacity: 0.0;
   transform: translate(-50%, -50%) scale(0.8);
 }
-
 .modal-header {
   display: inline-block;
   margin: 5px;
@@ -215,11 +191,9 @@ header {
   font-size: 42px;
   color: #4A4A4A;
 }
-
 .modal-hr {
   margin: 4px 0 4px 0;
 }
-
 .modal-subheader {
   display: inline-block;
   margin: 5px;
@@ -228,7 +202,6 @@ header {
   color: #4A4A4A;
   margin-bottom: 0;
 }
-
 .modal-input {
   padding: 5px;
   border: 1px solid #BDBDBD;
@@ -236,53 +209,41 @@ header {
   line-height: 15px;
   width: calc(100% - (5px + 1px) * 2);
 }
-
+.modal-input.invalid {
+  background-color: #e88181;
+}
 .modal-input-first-name {
   width: calc(50% - (5px + 1px) * 2 - 4px);
   margin-right: 4px;
 }
-
 .modal-input-last-name {
   width: calc(50% - (5px + 1px) * 2 - 4px);
   margin-left: 4px;
 }
-
 .modal-button {
-    display: inline-block;
-
-    border: 1px solid black;
-
-    margin: 7px 0 7px 0;
-
-    height: 23px;
-    width: 100%;
-
-    color: #4A4A4A;
-
-    background-color: #FFF;
-    border-radius: 3px;
+  display: inline-block;
+  border: 1px solid black;
+  margin: 7px 0 7px 0;
+  height: 23px;
+  width: 100%;
+  color: #4A4A4A;
+  background-color: #FFF;
+  border-radius: 3px;
 }
-
 .modal-close-button {
   position: absolute;
-
   border: none;
-
   color: #4A4A4A;
   background-color: white;
   font: 23px/100% arial, sans-serif;
   text-decoration: none;
-
   top: 25px;
   right: 25px;
   width: 20px;
   height: 20px;
-
   padding: 0;
   line-height: 20px;
-
 }
-
 .modal-close-button:after {
   content: "✖";
 }

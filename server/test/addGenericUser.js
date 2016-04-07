@@ -1,3 +1,6 @@
+// addGenericUser.js - just a simple program to add a dummy user to the db
+// Not commented more than this cuz it doesn't matter.
+
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 

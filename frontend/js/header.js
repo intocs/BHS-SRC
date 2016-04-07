@@ -1,6 +1,7 @@
-// require (import) the react and react-dom libraries
-let React = require("react"), ReactDOM = require("react-dom");
+// require (import) the react lib
+let React = require("react");
 
+// Header - a component which encapsulates the header bar
 class Header extends React.Component {
   render() {
     return (
@@ -13,15 +14,18 @@ class Header extends React.Component {
   }
 }
 
+// UserDropdown - a component which encapsulates dropdown bar for a logged in
+//  user
 class UserDropdown extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      "isDropdownVisible": false
+      "isDropdownVisible": false // A state variable representing whether the dropdown buttons are visible
     };
   }
 
+  // Self-explanatory
   showDropdown() {
     this.setState({"isDropdownVisible": true});
   }
@@ -31,6 +35,7 @@ class UserDropdown extends React.Component {
   }
 
   render() {
+    // If the dropdown is not currently visible
     if (!this.state.isDropdownVisible) {
       return (
         <div className="dropdown-mainbutton" onClick={ this.showDropdown.bind(this) }>Hi { this.props.username }! <i className="fa fa-chevron-down"></i></div>
@@ -53,7 +58,7 @@ class UserDropdown extends React.Component {
 }
 
 UserDropdown.propTypes = {
-  "username": React.PropTypes.string
+  "username": React.PropTypes.string // Property representing what the user should be called
 };
 
 UserDropdown.defaultProps = {
