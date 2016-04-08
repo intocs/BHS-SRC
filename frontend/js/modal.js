@@ -1,4 +1,4 @@
-// require (import) the react and react-dom libraries
+ // require (import) the react and react-dom libraries
 let React = require("react"), ReactDOM = require("react-dom");
 let ReactCSSTransitionGroup = require("react-addons-css-transition-group");
 
@@ -58,7 +58,9 @@ LoginModal.propTypes ={
 
 LoginModal.defaultProps = {
   "isOpen": false,
-  "onLoggingIn": function() {},
+  "onLoggingIn": function() {
+    
+  },
   "onClosing": function() {},
   "onSwitchingToSignup": function() {}
 };
