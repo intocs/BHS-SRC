@@ -40,8 +40,12 @@ module.exports = function(API, app) {
 
         // If the password matched the one in the DB...
         if (compRes) {
-          // Create a JWT token with the email address and a secret
-          var token = jwt.sign({email: user.email}, "5o0pers3ecr3tl33t");
+          // Create a JWT token with the email address, first name, last name, and a secret
+          var token = jwt.sign({
+            "email": user.email,
+            "given_name": user.fName,
+            "family_name": user.lName
+          }, "5o0pers3ecr3tl33t");
           // Return the token to the client
           res.status(200).json(token);
         } else {

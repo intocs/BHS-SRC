@@ -39,6 +39,12 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/ask', (req, res) => {
+  res.sendFile("ask.html", {
+    root: "./frontend"
+  });
+});
+
 // All of the routes for the users API
 require("./server/api/users")("/api/users", app);
 

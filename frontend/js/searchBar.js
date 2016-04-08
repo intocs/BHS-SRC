@@ -5,6 +5,18 @@ let React = require("react");
 
 // SearchBar - a class that encapsulates our beautiful searchbar
 class SearchBar extends React.Component {
+
+  onKeyPressed(e) {
+    let keyCode = e.which || e.keyCode;
+    if (keyCode == 13) {
+      this.submitSearch();
+    }
+  }
+
+  submitSearch() {
+    this.props.onSearchSubmitted(this.refs.searchInput.value);
+  }
+
   render() {
     return (
       <div className="searchbar-container">
@@ -12,8 +24,8 @@ class SearchBar extends React.Component {
           <tbody>
             <tr>
               <td className="searchbar-searchicon"><span className="fa fa-search"></span></td>
-              <td><input type="text" className="searchbar-input"/></td>
-              <td><button className="searchbar-button">Search</button></td>
+              <td><input type="text" ref="searchInput" className="searchbar-input" onKeyDown={ this.onKeyPressed.bind(this) }/></td>
+              <td><button className="searchbar-button" onClick={ this.submitSearch.bind(this) }>Search</button></td>
             </tr>
           </tbody>
         </table>

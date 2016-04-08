@@ -127,17 +127,23 @@ class App extends React.Component {
     });
   }
 
+  submitSearch(query) {
+    location.href = `/ask?q=${ encodeURIComponent(query) }`;
+  }
+
   render() {
     // If logged in...
     if (this.state.isLoggedIn) {
+      // Retrieve the account data from the JWT
+      let accData = JSON.parse(atob(localStorage.jwtToken.split(".")[1]));
       return (
         <div className="app">
           <div className="appContent">
             <Header>
-              <UserDropdown username="Vinay" onLogOut={ this.logOut.bind(this) }/>
+              <UserDropdown username={ accData.given_name } onLogOut={ this.logOut.bind(this) }/>
             </Header>
             <div id="questionContainer">
-              <SearchBar />
+              <SearchBar onSearchSubmitted={ this.submitSearch.bind(this) }/>
               <QuestionList questionDataList={ testData.QUESTIONDATA } />
             </div>
           </div>
