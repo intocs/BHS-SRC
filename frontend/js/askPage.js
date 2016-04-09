@@ -12,6 +12,13 @@ let headerComponents = require("./header"),
 
 class App extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isPublic: true
+    };
+  }
+
   // Log out of the the private display
   logOut() {
     // Remove the token and redirect to the "/"
@@ -29,9 +36,22 @@ class App extends React.Component {
           <Header>
             <UserDropdown username={ accData.given_name } onLogOut={ this.logOut.bind(this) }/>
           </Header>
-          <input type="text" placeholder="Enter your question here..." defaultValue={getData.has("q") ? getData.get("q") : ""}/>
-          <textarea></textarea>
-          Public? <input type="radio" name="isPublic" value="Yes" /><input type="radio" name="isPublic" value="No" />
+          <div className="formContent">
+            <input type="text" className="ask-subject" placeholder="Enter your question here..." defaultValue={getData.has("q") ? getData.get("q") : ""}/>
+            <textarea className="ask-text" placeholder="Write your question in letter form here..."></textarea>
+            <div className="ask-radio-container">
+              Public? <input type="radio" name="isPublic" value="Yes" defaultChecked="true" onClick={ this.setState.bind(this, {isPublic: true}) } />Yes
+                      <input type="radio" name="isPublic" value="No" onClick={ this.setState.bind(this, {isPublic: false}) } />No
+            </div>
+            { this.state.isPublic ? (
+                <div className="ask-confirmation">
+                  I understand that public questions will be visible to other students, and that once a questions is asked,<br/>
+                  an email is sent immediately to alumni <input type="checkbox" />
+                </div>
+              ) : null
+            }
+            <button className="ask-submit-button">Submit your question</button>
+          </div>
         </div>
       </div>
     );

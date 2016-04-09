@@ -1,0 +1,41 @@
+.formContent {
+  margin: 50px 10% 0 10%;
+}
+
+.formContent .ask-subject {
+  width: 100%;
+  padding: 3px;
+  font-size: 20px;
+  margin-bottom: 30px;
+  display: block;
+}
+
+.formContent .ask-text {
+  width: 80%;
+  display: block;
+  resize: none;
+  height: 15em;
+  font-family: helvetica;
+  font-size: 14px;
+  padding: 5px;
+  margin-bottom: 20px
+}
+
+.formContent .ask-radio-container {
+  margin-bottom: 10px
+}
+
+.formContent .ask-confirmation {
+  margin-bottom: 10px
+}
+
+.formContent .ask-submit-button {
+  display: inline-block;
+  border: 1px solid black;
+  margin: 7px 0 7px 0;
+  height: 23px;
+  width: 150px;
+  color: #4A4A4A;
+  background-color: #FFF;
+  border-radius: 3px;
+}
