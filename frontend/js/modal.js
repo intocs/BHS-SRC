@@ -75,7 +75,9 @@ LoginModal.propTypes ={
 
 LoginModal.defaultProps = {
   "isOpen": false,
-  "onLoggingIn": function() {},
+  "onLoggingIn": function() {
+
+  },
   "onClosing": function() {},
   "onSwitchingToSignup": function() {}
 };
