@@ -29,7 +29,12 @@ class App extends React.Component {
   render() {
     // Retrieve the account data from the JWT
     let accData = JSON.parse(atob(localStorage.jwtToken.split(".")[1]));
-    let getData = new Map(location.search.substr(1).split("&").map(s => [s.split("=")[0], decodeURIComponent(s.split("=")[1])]));
+
+    // Retrieves the GET data from the URL
+    let getData = new Map(
+      location.search.substr(1).split("&").map(s => [s.split("=")[0], decodeURIComponent(s.split("=")[1])])
+    );
+
     return (
       <div className="app">
         <div className="appContent">
