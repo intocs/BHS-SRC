@@ -1,6 +1,7 @@
 // users.js - file that manages routes associated with apis dealing with users
 
 // require the things
+//side note we can also require a model directly with mongoose
 var User = require("../models/user.js");
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
