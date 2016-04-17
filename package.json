@@ -28,6 +28,7 @@
     "express": "^4.13.4",
     "express-jwt": "^3.3.0",
     "jsonwebtoken": "^5.7.0",
+    "mongo-sanitize": "^1.0.0",
     "mongodb": "^2.1.14",
     "mongoose": "^4.4.3",
     "morgan": "^1.6.1",

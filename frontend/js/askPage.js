@@ -50,8 +50,8 @@ class App extends React.Component {
             </div>
             { this.state.isPublic ? (
                 <div className="ask-confirmation">
-                  I understand that public questions will be visible to other students, and that once a questions is asked,<br/>
-                  an email is sent immediately to alumni <input type="checkbox" />
+                  I understand that public questions will be visible to other students, and that once a question is asked,<br/>
+                  an email is sent immediately to an alumnus <input type="checkbox" />
                 </div>
               ) : null
             }

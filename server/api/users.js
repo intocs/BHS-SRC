@@ -6,6 +6,8 @@ var User = require("../models/user.js");
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 
+var sanitize = require('mongo-sanitize');
+
 // export...
 module.exports = function(API, app) {
   app.post(API + '/login', (req, res) => {
@@ -22,7 +24,7 @@ module.exports = function(API, app) {
     }
 
     // Find a user with the given email...
-    User.findOne({email: req.body.email}, function(err, user) {
+    User.findOne({ email: sanitize(req.body.email) }, function(err, user) {
 
       // If there is no such user or the db access failed...
       if (err || !user) {
@@ -62,16 +64,29 @@ module.exports = function(API, app) {
 
     var fields = ["fName", "lName", "email", "pwd"];
 
+    var conditions = {
+      "fName":   (s) => (s !== "" && sanitize(s) === s),
+      "lName":   (s) => (s !== "" && sanitize(s) === s),
+      "email":   (s) => (s !== "" && /[^\s@]+@[^\s@]+\.[^\s@]+/.test(s) && sanitize(s) === s),
+      "pwd":     (s) => (s !== "" && sanitize(s) === s),
+    };
+
     // make sure that all of the fields were sent in some form to here
     for (var i in fields) {
       var f = fields[i];
+
+      // Check that each field exists
       if (!req.body[f]) {
         res.status(400).send("missing " + f);
         return;
       }
-    }
 
-    // TODO check these fields for validity
+      // Check that each field is valid
+      if (!conditions[f](req.body[f])) {
+        res.status(400).send("invalid " + f);
+        return;
+      }
+    }
 
     // Hash the password with the given parameters (including salting and the like)
     bcrypt.hash(req.body.pwd, 10, function(err, hash) {
@@ -81,6 +96,8 @@ module.exports = function(API, app) {
         res.status(400).send("pwd hashing error");
         return;
       }
+
+
 
       // Create a user with the given credentials and save it
       new User({
