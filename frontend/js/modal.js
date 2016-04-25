@@ -166,9 +166,80 @@ SignupModal.defaultProps = {
   "onSwitchingToLogin": function() {}
 };
 
+// AlumModal - a component that encapsulates the modal for signing up a user
+class AlumModal extends React.Component {
+
+  // Called when the signup button is called - additional logic to deal with validation here
+  onSigningUp() {
+    if (this.validate()) {
+
+      let dataDict = {},
+          refNames = ["fName", "lName", "email", "pwd"];
+
+      refNames.forEach(n => { dataDict[n] = this.refs[n].value; });
+    }
+  }
+
+  // Called to validate the form, style things appropriately, and return whether or not everything was OK
+  validate() {
+
+    let isValid = true;
+
+    let conditions = {
+      "fName":   (elem) => (elem.value !== ""),
+      "lName":   (elem) => (elem.value !== ""),
+      "email":   (elem) => (elem.value !== "" && /[^\s@]+@[^\s@]+\.[^\s@]+/.test(elem.value)),
+    };
+
+    for (let ref in conditions) {
+      if (conditions[ref](this.refs[ref])) {
+        $(this.refs[ref]).removeClass("invalid");
+      } else {
+        $(this.refs[ref]).addClass("invalid");
+        isValid = false;
+      }
+    }
+
+    return isValid;
+
+  }
+
+  // When it is being rendered to DOM...
+  render() {
+    return (
+      <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing }>
+        <h1 className="modal-header">Add an Alum</h1>
+        <button className="modal-close-button" onClick={ this.props.onClosing } />
+        <input type="text" ref="fName" className="modal-input modal-input-first-name" placeholder="First name" />
+        <input type="text" ref="lName" className="modal-input modal-input-last-name" placeholder="Last name" />
+        <input type="text" ref="email" className="modal-input" placeholder="Email address (non-bsd preferable)" />
+        <button className="modal-button" onClick={ this.onSigningUp.bind(this) }>Register</button>
+      </Modal>
+    );
+  }
+
+  componentDidUpdate() {
+      if (this.props.isOpen) {
+          this.refs.fName.focus();
+      }
+  }
+
+}
+
+SignupModal.propTypes ={
+  "isOpen": React.PropTypes.bool,             // Property that models whether or not this modal is open
+  "onClosing": React.PropTypes.func,          // Event that triggers when the modal is closed without effect
+};
+
+SignupModal.defaultProps = {
+  "isOpen": false,
+  "onClosing": function() {},
+};
+
 // Export the things
 module.exports = {
   "Modal": Modal,
   "LoginModal": LoginModal,
-  "SignupModal": SignupModal
+  "SignupModal": SignupModal,
+  "AlumModal": AlumModal
 };

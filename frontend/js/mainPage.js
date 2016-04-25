@@ -20,7 +20,8 @@ let headerComponents = require("./header"),
 let modals = require("./modal"),
     Modal = modals.Modal,
     LoginModal = modals.LoginModal,
-    SignupModal = modals.SignupModal;
+    SignupModal = modals.SignupModal,
+    AlumModal = modals.AlumModal;
 
 // The next two methods disable and enable scrolling on the page, respectively
 //  They are used to make the modals behave more tamely when they are opened
@@ -42,6 +43,7 @@ class App extends React.Component {
     this.state = {
       "signupModalOpen": false,      // State variable representing whether the signup modal is open
       "loginModalOpen": false,       // State variable representing whether the login modal is open
+      "alumModalOpen": false,
       "isLoggedIn": props.isLoggedIn // State variable representing whether or not the user is logged in
     };
   }
@@ -64,6 +66,15 @@ class App extends React.Component {
   closeLoginModal() {
       enableScrolling();
       this.setState({"loginModalOpen": false});
+  }
+
+  openAlumModal()  {
+      disableScrolling();
+      this.setState({"alumModalOpen": true });
+  }
+  closeAlumModal() {
+      enableScrolling();
+      this.setState({"alumModalOpen": false});
   }
 
   logIn(email, password) {
@@ -154,6 +165,7 @@ class App extends React.Component {
         <div className="app">
           <div className={"appContent" + (this.state.signupModalOpen || this.state.loginModalOpen ? " blurred" : "")}>
             <Header>
+              <button id="alumButton" className="headerButton" onClick={ this.openAlumModal.bind(this) }>Register an Alum</button>
               <button id="logInButton" className="headerButton" onClick={ this.openLoginModal.bind(this) }>Log In</button>
               <button id="signUpButton" className="headerButton" onClick={ this.openSignupModal.bind(this) }>Sign Up</button>
             </Header>
@@ -169,6 +181,8 @@ class App extends React.Component {
             onLoggingIn={ this.logIn.bind(this) }
             onClosing={ this.closeLoginModal.bind(this) }
             onSwitchingToSignup={ (function() { this.closeLoginModal(); this.openSignupModal(); }).bind(this) } />
+          <AlumModal isOpen={ this.state.alumModalOpen }
+            onClosing={ this.closeAlumModal.bind(this) } />
         </div>
       );
     }

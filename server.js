@@ -38,15 +38,22 @@ app.get('/', (req, res) => {
     root: "./frontend"
   });
 });
-/// catch 404 and forwarding to error handler ============================================================
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+
+// catch 404 and forwarding to error handler
+// app.use(function(req, res, next) {
+//     var err = new Error('Not Found');
+//     err.status = 404;
+//     next(err);
+// });
 
 app.get('/ask', (req, res) => {
   res.sendFile("ask.html", {
+    root: "./frontend"
+  });
+});
+
+app.get('/addAlum', (req, res) => {
+  res.sendFile("addAlumnus.html", {
     root: "./frontend"
   });
 });

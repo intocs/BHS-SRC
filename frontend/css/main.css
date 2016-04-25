@@ -93,7 +93,7 @@ header {
   background-color: black;
   border-radius: 3px;
 }
-#logInButton, #signUpButton {
+#logInButton, #signUpButton, #alumButton {
   background-color: inherit;
   border-width: 1.5px;
   color: #4A4A4A;
