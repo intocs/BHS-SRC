@@ -97,7 +97,9 @@ module.exports = function(API, app) {
         return;
       }
 
-
+      if (User.find({email: req.body.email}).length() > 0) {
+        res.status(400).send("duplicate email");
+      }
 
       // Create a user with the given credentials and save it
       new User({

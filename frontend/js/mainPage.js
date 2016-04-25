@@ -138,6 +138,27 @@ class App extends React.Component {
     });
   }
 
+  registerAlum(formData) {
+    $.ajax({
+      "type": "POST",
+      "url": "/api/alumni/register",
+      "data": {
+        "fName": formData.fName,
+        "lName": formData.lName,
+        "email": formData.email
+      },
+      "success": function(data) {
+        // When I get a success message... close the modals.
+        //  (DO NOT log in, opens up potential security hole (? NB: Maybe not actually) )
+        this.closeAlumModal();
+      }.bind(this),
+      "error": function(xhr, type) {
+        // Something got messed up. TODO: deal with this in a way tht makes sense
+        // console.log("SIGNUP ERROR [", type, "]");
+      }
+    });
+  }
+
   submitSearch(query) {
     location.href = `/ask?q=${ encodeURIComponent(query) }`;
   }
@@ -165,9 +186,9 @@ class App extends React.Component {
         <div className="app">
           <div className={"appContent" + (this.state.signupModalOpen || this.state.loginModalOpen ? " blurred" : "")}>
             <Header>
-              <button id="alumButton" className="headerButton" onClick={ this.openAlumModal.bind(this) }>Register an Alum</button>
               <button id="logInButton" className="headerButton" onClick={ this.openLoginModal.bind(this) }>Log In</button>
               <button id="signUpButton" className="headerButton" onClick={ this.openSignupModal.bind(this) }>Sign Up</button>
+              <button id="alumButton" className="headerButton" onClick={ this.openAlumModal.bind(this) }>Register an Alum</button>
             </Header>
             <div id="questionContainer">
               <QuestionList questionDataList={ testData.QUESTIONDATA } />
@@ -182,7 +203,8 @@ class App extends React.Component {
             onClosing={ this.closeLoginModal.bind(this) }
             onSwitchingToSignup={ (function() { this.closeLoginModal(); this.openSignupModal(); }).bind(this) } />
           <AlumModal isOpen={ this.state.alumModalOpen }
-            onClosing={ this.closeAlumModal.bind(this) } />
+            onClosing={ this.closeAlumModal.bind(this) }
+            onRegistering={ this.registerAlum.bind(this) }/>
         </div>
       );
     }

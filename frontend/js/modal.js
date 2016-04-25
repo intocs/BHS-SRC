@@ -170,13 +170,14 @@ SignupModal.defaultProps = {
 class AlumModal extends React.Component {
 
   // Called when the signup button is called - additional logic to deal with validation here
-  onSigningUp() {
+  onRegistering() {
     if (this.validate()) {
 
       let dataDict = {},
-          refNames = ["fName", "lName", "email", "pwd"];
+          refNames = ["fName", "lName", "email"];
 
       refNames.forEach(n => { dataDict[n] = this.refs[n].value; });
+      this.props.onRegistering(dataDict);
     }
   }
 
@@ -213,7 +214,7 @@ class AlumModal extends React.Component {
         <input type="text" ref="fName" className="modal-input modal-input-first-name" placeholder="First name" />
         <input type="text" ref="lName" className="modal-input modal-input-last-name" placeholder="Last name" />
         <input type="text" ref="email" className="modal-input" placeholder="Email address (non-bsd preferable)" />
-        <button className="modal-button" onClick={ this.onSigningUp.bind(this) }>Register</button>
+        <button className="modal-button" onClick={ this.onRegistering.bind(this) }>Register</button>
       </Modal>
     );
   }
@@ -226,14 +227,16 @@ class AlumModal extends React.Component {
 
 }
 
-SignupModal.propTypes ={
+AlumModal.propTypes ={
   "isOpen": React.PropTypes.bool,             // Property that models whether or not this modal is open
   "onClosing": React.PropTypes.func,          // Event that triggers when the modal is closed without effect
+  "onRegistering": React.PropTypes.func
 };
 
-SignupModal.defaultProps = {
+AlumModal.defaultProps = {
   "isOpen": false,
   "onClosing": function() {},
+  "onRegistering": function() {}
 };
 
 // Export the things
