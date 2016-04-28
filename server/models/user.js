@@ -11,7 +11,8 @@ var userSchema = mongoose.Schema({
   email: String,
   pwdHash: String,
   fName: String,
-  lName: String
+  lName: String,
+  qIDs: [mongoose.Schema.Types.ObjectId]
 });
 
 // Define a method that compares an external password with the hashed password

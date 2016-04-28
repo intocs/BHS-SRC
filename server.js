@@ -61,6 +61,7 @@ app.get('/addAlum', (req, res) => {
 // All of the routes for the users API
 require("./server/api/users")("/api/users", app);
 require("./server/api/alumni")("/api/alumni", app);
+require("./server/api/questions")("/api/questions", app);
 
 // Tell the Express App to start listening
 app.listen(PORT, () => {

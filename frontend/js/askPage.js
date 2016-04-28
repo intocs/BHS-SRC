@@ -15,7 +15,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPublic: true
+      isPublic: true,
+      isLocked: false
     };
   }
 
@@ -24,6 +25,35 @@ class App extends React.Component {
     // Remove the token and redirect to the "/"
     window.localStorage.removeItem("jwtToken");
     location.href = "/";
+  }
+
+  submitQuestion() {
+    if (this.refs.qpublic.checked && !this.refs.publicconf.checked ) {
+      alert("NO CONFO!"); // TODO: Fix
+      return;
+    }
+    var isPublic = this.refs.qpublic.checked;
+    // Figure out headers with jquery post
+    $.ajax({
+      "type": "POST",
+      "url": "/api/questions/ask",
+      "data": {
+        "title": this.refs.qtitle.value,
+        "body": this.refs.qbody.value
+      },
+      "headers": {
+        "Authorization": "Bearer " + window.localStorage.jwtToken
+      },
+      "success": function(data) {
+        // When I get back the token...
+        // Store it in localStorage so that it is persistent across window-closes and stuff
+        console.log("yup");
+        window.location.href = "/";
+      }.bind(this),
+      "error": function(xhr, type, err) {
+        console.log("LOGIN ERROR [", xhr, type, err, "]");
+      }
+    });
   }
 
   render() {
@@ -42,20 +72,20 @@ class App extends React.Component {
             <UserDropdown username={ accData.given_name } onLogOut={ this.logOut.bind(this) }/>
           </Header>
           <div className="formContent">
-            <input type="text" className="ask-subject" placeholder="Enter your question here..." defaultValue={getData.has("q") ? getData.get("q") : ""}/>
-            <textarea className="ask-text" placeholder="Write your question in letter form here..."></textarea>
+            <input type="text" className="ask-subject" placeholder="Enter your question here..." ref="qtitle" defaultValue={getData.has("q") ? getData.get("q") : ""}/>
+            <textarea className="ask-text" placeholder="Write your question in letter form here..." ref="qbody"></textarea>
             <div className="ask-radio-container">
-              Public? <input type="radio" name="isPublic" value="Yes" defaultChecked="true" onClick={ this.setState.bind(this, {isPublic: true}) } />Yes
+              Public? <input type="radio" name="isPublic" value="Yes" defaultChecked="true" onClick={ this.setState.bind(this, {isPublic: true}) } ref="qpublic"/>Yes
                       <input type="radio" name="isPublic" value="No" onClick={ this.setState.bind(this, {isPublic: false}) } />No
             </div>
             { this.state.isPublic ? (
                 <div className="ask-confirmation">
                   I understand that public questions will be visible to other students, and that once a question is asked,<br/>
-                  an email is sent immediately to an alumnus <input type="checkbox" />
+                  an email is sent immediately to an alumnus <input ref="publicconf" type="checkbox" />
                 </div>
               ) : null
             }
-            <button className="ask-submit-button">Submit your question</button>
+            <button className="ask-submit-button" onClick={ this.submitQuestion.bind(this) }>Submit your question</button>
           </div>
         </div>
       </div>
