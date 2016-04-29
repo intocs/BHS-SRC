@@ -42,26 +42,26 @@ Modal.defaultProps = {
 
 // LoginModal - a component that encapsulates the modal for logging in to the site
 class LoginModal extends React.Component {
-    
+
   onLoggingIn() {
       if (this.validate()) {
           let dataDict = {},
-              refNames = ["email", "pwd"];
-              
+              refNames = ["email", "password"];
+
           refNames.forEach(n => { dataDict[n] = this.refs[n].value; });
-          
+
           this.props.onLoggingIn(dataDict);
       }
   }
-  
+
   validate() {
       let isValid = true;
-      
+
       let conditions = {
-          "email":   (elem) => (elem.value !== "" && /[^\s@]+@[^\s@]+\.[^\s@]+/.test(elem.value)),
-          "pwd":     (elem) => (elem.value !== "")
+          "email":    (elem) => (elem.value !== "" && /[^\s@]+@[^\s@]+\.[^\s@]+/.test(elem.value)),
+          "password": (elem) => (elem.value !== "")
       };
-      
+
       for (let ref in conditions) {
           if (conditions[ref](this.refs[ref])) {
               $(this.refs[ref]).removeClass("invalid");
@@ -70,7 +70,7 @@ class LoginModal extends React.Component {
               isValid = false;
           }
       }
-      
+
       return isValid;
   }
 
@@ -81,7 +81,7 @@ class LoginModal extends React.Component {
         <h1 className="modal-header">Log in</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
         <input type="text" ref="email" className="modal-input" placeholder="Email" />
-        <input type="password" ref="pwd" className="modal-input" placeholder="Password" />
+        <input type="password" ref="password" className="modal-input" placeholder="Password" />
         <button className="modal-button" onClick={ this.onLoggingIn.bind(this) }>Log in</button>
         <hr className="modal-hr" />
         <h6 className="modal-subheader">Don't have an account?</h6>
@@ -92,7 +92,7 @@ class LoginModal extends React.Component {
 
   componentDidUpdate() {
       if (this.props.isOpen) {
-          this.refs["email"].focus();
+          this.refs.email.focus();
       }
   }
 }

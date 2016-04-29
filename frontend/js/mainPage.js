@@ -77,15 +77,15 @@ class App extends React.Component {
       this.setState({"alumModalOpen": false});
   }
 
-  logIn(email, password) {
+  logIn(formData) {
 
     // Send a request to the server to log in given the credentials.
     $.ajax({
       "type": "POST",
       "url": "/api/users/login",
       "data": {
-        "email": email,
-        "password": password
+        "email": formData.email,
+        "password": formData.password
       },
       "success": function(data) {
         // When I get back the token...
