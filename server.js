@@ -59,6 +59,7 @@ app.get('/addAlum', (req, res) => {
 });
 
 // All of the routes for the users API
+console.log("hi");
 require("./server/api/users")("/api/users", app);
 require("./server/api/alumni")("/api/alumni", app);
 require("./server/api/questions")("/api/questions", app);

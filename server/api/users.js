@@ -8,8 +8,10 @@ var bcrypt = require('bcrypt');
 
 var sanitize = require('mongo-sanitize');
 
+
 // export...
 module.exports = function(API, app) {
+  console.log("hi -REQD");
   app.post(API + '/login', (req, res) => {
     // Run this when a post is retrieved at the login part of the API
 
@@ -97,25 +99,33 @@ module.exports = function(API, app) {
         return;
       }
 
-      if (User.find({email: req.body.email}).length() > 0) {
-        res.status(400).send("duplicate email");
-      }
 
-      // Create a user with the given credentials and save it
-      new User({
-        "email": req.body.email,
-        "pwdHash": hash,
-        "fName": req.body.fName,
-        "lName": req.body.lName
-      }).save(function(err) {
-        // If there was an error saving it...
+      User.find({email: req.body.email}, function(err, count) {
+
         if (err) {
-          console.error("saving error: ", err);
-          res.status(400).send("entry saving error");
-        } else {
-          res.status(200).send("success");
+          res.status(500).send("account lookup error");
         }
+        if (count < 0) {
+          res.status(403).send("duplicate email");
+        }
+        // Create a user with the given credentials and save it
+        new User({
+          "email": req.body.email,
+          "pwdHash": hash,
+          "fName": req.body.fName,
+          "lName": req.body.lName
+        }).save(function(err) {
+          // If there was an error saving it...
+          if (err) {
+            console.error("saving error: ", err);
+            res.status(400).send("entry saving error");
+          } else {
+            res.status(200).send("success");
+          }
+        });
       });
+
+
     });
 
   });
