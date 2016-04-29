@@ -11,7 +11,6 @@ var sanitize = require('mongo-sanitize');
 
 // export...
 module.exports = function(API, app) {
-  console.log("hi -REQD");
   app.post(API + '/login', (req, res) => {
     // Run this when a post is retrieved at the login part of the API
 

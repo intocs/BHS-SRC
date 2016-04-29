@@ -14,7 +14,7 @@ var User = require('./server/models/user');
 var app = express();
 
 // set the port (for debugging and permissions purpose, avoid 80, the default port)
-const PORT = 8000;
+const PORT = 8080;
 
 // Connect to the db
 mongoose.connect('mongodb://localhost/bhssrc');
