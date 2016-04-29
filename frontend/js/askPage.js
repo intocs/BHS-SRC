@@ -28,32 +28,33 @@ class App extends React.Component {
   }
 
   submitQuestion() {
-    if (this.refs.qpublic.checked && !this.refs.publicconf.checked ) {
-      alert("NO CONFO!"); // TODO: Fix
-      return;
-    }
-    var isPublic = this.refs.qpublic.checked;
-    // Figure out headers with jquery post
-    $.ajax({
-      "type": "POST",
-      "url": "/api/questions/ask",
-      "data": {
-        "title": this.refs.qtitle.value,
-        "body": this.refs.qbody.value
-      },
-      "headers": {
-        "Authorization": "Bearer " + window.localStorage.jwtToken
-      },
-      "success": function(data) {
-        // When I get back the token...
-        // Store it in localStorage so that it is persistent across window-closes and stuff
-        console.log("yup");
-        window.location.href = "/";
-      }.bind(this),
-      "error": function(xhr, type, err) {
-        console.log("LOGIN ERROR [", xhr, type, err, "]");
+    if (!this.state.isLocked) {
+      if (this.refs.qpublic.checked && !this.refs.publicconf.checked ) {
+        alert("PLEASE CONFIRM FIRST!"); // TODO: Fix
+        return;
       }
-    });
+      var isPublic = this.refs.qpublic.checked;
+      this.setState({isLocked: true});
+
+      $.ajax({
+        "type": "POST",
+        "url": "/api/questions/ask",
+        "data": {
+          "title": this.refs.qtitle.value,
+          "body": this.refs.qbody.value
+        },
+        "headers": {
+          "Authorization": "Bearer " + window.localStorage.jwtToken
+        },
+        "success": function(data) {
+          window.location.href = "/";
+        }.bind(this),
+        "error": function(xhr, type, err) {
+          console.log("LOGIN ERROR [", xhr, type, err, "]");
+          this.setState({isLocked: false});
+        }.bind(this)
+      });
+    }
   }
 
   render() {
