@@ -70,6 +70,7 @@ module.exports = function(API, app) {
       "lName":   (s) => (s !== "" && sanitize(s) === s),
       "email":   (s) => (s !== "" && /[^\s@]+@[^\s@]+\.[^\s@]+/.test(s) && sanitize(s) === s),
       "pwd":     (s) => (s !== "" && sanitize(s) === s),
+      "authCode": (s) => (s !== "")
     };
 
     // make sure that all of the fields were sent in some form to here
@@ -89,42 +90,57 @@ module.exports = function(API, app) {
       }
     }
 
-    // Hash the password with the given parameters (including salting and the like)
-    bcrypt.hash(req.body.pwd, 10, function(err, hash) {
-
-      // If there was an error hashing...
+    bcrypt.compare(req.body.authCode, '$2a$10$G8lltAunUqUOeX/4SiDU6eFCgqtgcsLqafhuqgfUbxpI9hJ4pWSdi', function(err, compRes) {
       if (err) {
-        res.status(400).send("pwd hashing error");
+        res.status(500).send("authCode match failure");
+        return;
+      }
+
+      if (!compRes) {
+        res.status(400).send("authCode does not match");
         return;
       }
 
 
-      User.find({email: req.body.email}, function(err, count) {
+      // Hash the password with the given parameters (including salting and the like)
+      bcrypt.hash(req.body.pwd, 10, function(err, hash) {
 
+        // If there was an error hashing...
         if (err) {
-          res.status(500).send("account lookup error");
+          res.status(400).send("pwd hashing error");
+          return;
         }
-        if (count < 0) {
-          res.status(403).send("duplicate email");
-        }
-        // Create a user with the given credentials and save it
-        new User({
-          "email": req.body.email,
-          "pwdHash": hash,
-          "fName": req.body.fName,
-          "lName": req.body.lName
-        }).save(function(err) {
-          // If there was an error saving it...
+
+
+        User.find({email: req.body.email}, function(err, count) {
+
           if (err) {
-            console.error("saving error: ", err);
-            res.status(400).send("entry saving error");
-          } else {
-            res.status(200).send("success");
+            res.status(500).send("account lookup error");
+            return;
           }
+          if (count < 0) {
+            res.status(400).send("duplicate email");
+            return;
+          }
+          // Create a user with the given credentials and save it
+          new User({
+            "email": req.body.email,
+            "pwdHash": hash,
+            "fName": req.body.fName,
+            "lName": req.body.lName
+          }).save(function(err) {
+            // If there was an error saving it...
+            if (err) {
+              console.error("saving error: ", err);
+              res.status(400).send("entry saving error");
+            } else {
+              res.status(200).send("success");
+            }
+          });
         });
+
+
       });
-
-
     });
 
   });

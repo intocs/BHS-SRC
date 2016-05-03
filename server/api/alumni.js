@@ -3,18 +3,20 @@
 
 var Alum = require("../models/alum.js");
 
+var bcrypt = require("bcrypt");
 var sanitize = require('mongo-sanitize');
 
 
 module.exports = function(API, app) {
   app.post(API + "/register", (req, res) => {
 
-    var fields = ["fName", "lName", "email"];
+    var fields = ["fName", "lName", "email", "authCode"];
 
     var conditions = {
       "fName":   (s) => (s !== "" && sanitize(s) === s),
       "lName":   (s) => (s !== "" && sanitize(s) === s),
-      "email":   (s) => (s !== "" && /[^\s@]+@[^\s@]+\.[^\s@]+/.test(s) && sanitize(s) === s)
+      "email":   (s) => (s !== "" && /[^\s@]+@[^\s@]+\.[^\s@]+/.test(s) && sanitize(s) === s),
+      "authCode": (s) => (s !== "" && sanitize(s) === s)
     };
 
     // make sure that all of the fields were sent in some form to here
@@ -34,23 +36,39 @@ module.exports = function(API, app) {
       }
     }
 
-    if (Alum.find({email: req.body.email}).length() > 0) {
-      res.status(400).send("duplicate email");
-    }
-
-    new Alum({
-      "email": req.body.email,
-      "fName": req.body.fName,
-      "lName": req.body.lName
-    }).save(function(err) {
-      // If there was an error saving it...
+    Alum.find({email: req.body.email}, function(err, count) {
       if (err) {
-        console.error("saving error: ", err);
-        res.status(400).send("entry saving error");
-      } else {
-        res.status(200).send("success");
+        res.status(500).send("error testing for duplicate email");
+        return;
       }
-    });
+      if (count > 0) {
+        res.status(400).send("duplicate email");
+        return;
+      }
 
+      bcrypt.compare(req.body.authCode, '$2a$10$G8lltAunUqUOeX/4SiDU6eFCgqtgcsLqafhuqgfUbxpI9hJ4pWSdi', function(err, compRes) {
+
+        if (err) {
+          res.status(500).send("authCode match failure");
+          return;
+        }
+
+        if (compRes) {
+          new Alum({
+            "email": req.body.email,
+            "fName": req.body.fName,
+            "lName": req.body.lName
+          }).save(function(err) {
+            if (err) {
+              res.status(500).send("entry saving error");
+            } else {
+              res.status(200).send("success");
+            }
+          });
+        } else {
+          res.status(400).send("authCode does not match");
+        }
+      });
+    });
   });
 };

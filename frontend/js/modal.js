@@ -121,7 +121,7 @@ class SignupModal extends React.Component {
     if (this.validate()) {
 
       let dataDict = {},
-          refNames = ["fName", "lName", "email", "pwd", "confPwd"];
+          refNames = ["fName", "lName", "email", "pwd", "confPwd", "authCode"];
 
       refNames.forEach(n => { dataDict[n] = this.refs[n].value; });
 
@@ -139,7 +139,8 @@ class SignupModal extends React.Component {
       "lName":   (elem) => (elem.value !== ""),
       "email":   (elem) => (elem.value !== "" && /[^\s@]+@[^\s@]+\.[^\s@]+/.test(elem.value)),
       "pwd":     (elem) => (elem.value !== ""),
-      "confPwd": (elem) => (elem.value !== "" && elem.value === this.refs.pwd.value)
+      "confPwd": (elem) => (elem.value !== "" && elem.value === this.refs.pwd.value),
+      "authCode":(elem) => (elem.value !== "")
     };
 
     for (let ref in conditions) {
@@ -161,7 +162,7 @@ class SignupModal extends React.Component {
       <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing }>
         <h1 className="modal-header">Sign up</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
-        <input type="text" className="modal-input" placeholder="Authentication code" ref="authentication-input"/>
+        <input type="text" ref="authCode" className="modal-input" placeholder="Authentication code"/>
         <input type="text" ref="fName" className="modal-input modal-input-first-name" placeholder="First name" />
         <input type="text" ref="lName" className="modal-input modal-input-last-name" placeholder="Last name" />
         <input type="text" ref="email" className="modal-input" placeholder="Email address (non-bsd preferable)" />
@@ -205,7 +206,7 @@ class AlumModal extends React.Component {
     if (this.validate()) {
 
       let dataDict = {},
-          refNames = ["fName", "lName", "email"];
+          refNames = ["fName", "lName", "email", "authCode"];
 
       refNames.forEach(n => { dataDict[n] = this.refs[n].value; });
       this.props.onRegistering(dataDict);
@@ -221,6 +222,7 @@ class AlumModal extends React.Component {
       "fName":   (elem) => (elem.value !== ""),
       "lName":   (elem) => (elem.value !== ""),
       "email":   (elem) => (elem.value !== "" && /[^\s@]+@[^\s@]+\.[^\s@]+/.test(elem.value)),
+      "authCode": (elem) => (elem.value !== "")
     };
 
     for (let ref in conditions) {
@@ -242,6 +244,7 @@ class AlumModal extends React.Component {
       <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing }>
         <h1 className="modal-header">Add an Alum</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
+        <input type="text" ref="authCode" className="modal-input" placeholder="Authentication Code" />
         <input type="text" ref="fName" className="modal-input modal-input-first-name" placeholder="First name" />
         <input type="text" ref="lName" className="modal-input modal-input-last-name" placeholder="Last name" />
         <input type="text" ref="email" className="modal-input" placeholder="Email address (non-bsd preferable)" />
@@ -252,7 +255,7 @@ class AlumModal extends React.Component {
 
   componentDidUpdate() {
       if (this.props.isOpen) {
-          this.refs.fName.focus();
+          this.refs.authCode.focus();
       }
   }
 

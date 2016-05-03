@@ -6,7 +6,7 @@ class Header extends React.Component {
   render() {
     return (
       <header>
-        <h1 className="pageHeader">BHS Science Career Center</h1>
+        <h1 className="pageHeader">BroncosConnect</h1>
         { this.props.children }
         <hr className="headerLine" />
       </header>

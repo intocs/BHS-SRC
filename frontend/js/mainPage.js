@@ -123,7 +123,8 @@ class App extends React.Component {
         "fName": formData.fName,
         "lName": formData.lName,
         "email": formData.email,
-        "pwd": formData.pwd
+        "pwd": formData.pwd,
+        "authCode": formData.authCode
       },
       "success": function(data) {
         // When I get a success message... close the modals.
@@ -132,9 +133,13 @@ class App extends React.Component {
         this.closeLoginModal();
       }.bind(this),
       "error": function(xhr, type) {
-        // Something got messed up. TODO: deal with this in a way tht makes sense
-        // console.log("SIGNUP ERROR [", type, "]");
-      }
+        if (xhr.status == 400) {
+          var errorMsg = xhr.responseText;
+          if (errorMsg == "authCode does not match") {
+            $(this.refs.signupmodal.refs.authCode).addClass("invalid");
+          }
+        }
+      }.bind(this)
     });
   }
 
@@ -145,17 +150,24 @@ class App extends React.Component {
       "data": {
         "fName": formData.fName,
         "lName": formData.lName,
-        "email": formData.email
+        "email": formData.email,
+        "authCode": formData.authCode
       },
       "success": function(data) {
         // When I get a success message... close the modals.
         //  (DO NOT log in, opens up potential security hole (? NB: Maybe not actually) )
         this.closeAlumModal();
       }.bind(this),
-      "error": function(xhr, type) {
+      "error": function(xhr, errorType, error) {
         // Something got messed up. TODO: deal with this in a way tht makes sense
         // console.log("SIGNUP ERROR [", type, "]");
-      }
+        if (xhr.status == 400) {
+          var errorMsg = xhr.responseText;
+          if (errorMsg == "authCode does not match") {
+            $(this.refs.alummodal.refs.authCode).addClass("invalid");
+          }
+        }
+      }.bind(this)
     });
   }
 
@@ -184,7 +196,7 @@ class App extends React.Component {
     } else {
       return (
         <div className="app">
-          <div className={"appContent" + (this.state.signupModalOpen || this.state.loginModalOpen ? " blurred" : "")}>
+          <div className={"appContent" + (this.state.signupModalOpen || this.state.loginModalOpen || this.state.alumModalOpen ? " blurred" : "")}>
             <Header>
               <button id="logInButton" className="headerButton" onClick={ this.openLoginModal.bind(this) }>Log In</button>
               <button id="signUpButton" className="headerButton" onClick={ this.openSignupModal.bind(this) }>Sign Up</button>
@@ -197,14 +209,15 @@ class App extends React.Component {
           <SignupModal isOpen={ this.state.signupModalOpen }
             onSigningUp={ this.signUp.bind(this) }
             onClosing={ this.closeSignupModal.bind(this) }
-            onSwitchingToLogin={ (function() { this.closeSignupModal(); this.openLoginModal(); }).bind(this) } />
+            onSwitchingToLogin={ (function() { this.closeSignupModal(); this.openLoginModal(); }).bind(this) }
+            ref="signupmodal" />
           <LoginModal isOpen={ this.state.loginModalOpen }
             onLoggingIn={ this.logIn.bind(this) }
             onClosing={ this.closeLoginModal.bind(this) }
             onSwitchingToSignup={ (function() { this.closeLoginModal(); this.openSignupModal(); }).bind(this) } />
           <AlumModal isOpen={ this.state.alumModalOpen }
             onClosing={ this.closeAlumModal.bind(this) }
-            onRegistering={ this.registerAlum.bind(this) }/>
+            onRegistering={ this.registerAlum.bind(this) } ref="alummodal" />
         </div>
       );
     }
