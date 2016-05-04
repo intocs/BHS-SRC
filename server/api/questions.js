@@ -2,6 +2,7 @@
 
 var Question = require("../models/question.js");
 var User = require("../models/user.js");
+var Alum = require("../models/alum.js");
 
 var sanitize = require('mongo-sanitize');
 
@@ -26,7 +27,28 @@ module.exports = function(API, app) {
           date: new Date()
         }).save(function(err, savedQ) {
           u.qIDs.push(savedQ.id);
-          res.status(200).send("Success!");
+
+          var sendgrid = require("sendgrid")("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");
+
+          Alum.find({}, function(err, alumni) {
+            for (var i in alumni) {
+              var alum = alumni[i];
+
+              var email = new sendgrid.Email({
+              	to: alum.email,
+              	toname: alum.fName + " " + alum.lName,
+              	from: "mailer@broncosconnect.org",
+              	fromname: "BroncosConnect",
+              	subject: req.body.title,
+              	text: req.body.body
+              });
+
+              sendgrid.send(email);
+
+            }
+            res.status(200).send("Success!");
+          });
+
         });
 
       });
