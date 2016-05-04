@@ -72,6 +72,7 @@ app.post('/api/email/parse', function (req, res) {
   var text = req.body.text;
   var subject = req.body.subject;
   console.log(from, subject, text);
+  res.status(200).send();
 });
 
 // Tell the Express App to start listening
