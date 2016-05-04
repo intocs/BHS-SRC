@@ -4,6 +4,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var multer = require('multer');
 
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
@@ -22,6 +23,9 @@ mongoose.connect('mongodb://localhost/bhssrc');
 // Tell the Express app to use BodyParser, which allows for easy parsing of POST requests
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Use Multer, which can process multipart/form-data (which is what the SendGrid API uses)
+app.use(multer({dest: "./uploads/"}).single("email"));
 
 // Configure the request handler to automatically deal with JWT tokens, which are used for authentication
 app.use(expressJWT({ secret: "5o0pers3ecr3tl33t", credentialsRequired: false}).unless({ path: ['/api'] }));
@@ -62,6 +66,13 @@ app.get('/addAlum', (req, res) => {
 require("./server/api/users")("/api/users", app);
 require("./server/api/alumni")("/api/alumni", app);
 require("./server/api/questions")("/api/questions", app);
+
+app.post('/api/email/parse', function (req, res) {
+  var from = req.body.from;
+  var text = req.body.text;
+  var subject = req.body.subject;
+  console.log(from, subject, text);
+});
 
 // Tell the Express App to start listening
 app.listen(PORT, () => {

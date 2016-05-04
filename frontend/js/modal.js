@@ -85,7 +85,7 @@ class LoginModal extends React.Component {
         <button className="modal-button" onClick={ this.onLoggingIn.bind(this) }>Log in</button>
         <hr className="modal-hr" />
         <h6 className="modal-subheader">Don't have an account?</h6>
-        <button className="modal-button" onClick={ this.props.onSwitchingToSignup }>Create an account</button>
+        <button className="modal-button" onClick={ this.props.onSwitchingToSignup }>Sign up</button>
       </Modal>
     );
   }
