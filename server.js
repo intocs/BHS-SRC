@@ -71,7 +71,15 @@ app.post('/api/email/parse', function (req, res) {
   var from = req.body.from;
   var text = req.body.text;
   var subject = req.body.subject;
-  console.log(from, subject, text);
+  function parseEmail(text) {
+    var ID_REGEX = /\[ID=(\S+)\] DO NOT DELETE!/; //
+    var id = text.match(ID_REGEX)[1];
+    var HDR1_REGEX = /(?!On[\s\S]*On\s[\s\S]+?wrote:)(On\s([\s\S]+?)wrote:)[\s\S]*$/m;
+    var HDR2_REGEX = /From: BroncosConnect[\s\S]*$/m;
+    var otext = text.replace(HDR1_REGEX, "").replace(HDR2_REGEX, "").replace(/(^\s+|\s+$)/g, "");
+    return otext;
+  }
+
   res.status(200).send();
 });
 
