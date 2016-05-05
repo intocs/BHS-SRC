@@ -42,7 +42,14 @@ Modal.defaultProps = {
 
 // LoginModal - a component that encapsulates the modal for logging in to the site
 class LoginModal extends React.Component {
-
+    
+  onKeyPressed(e) {
+    let keyCode = e.which || e.keyCode;
+    if (keyCode == 13) {
+      this.onLoggingIn();
+    }
+  }
+  
   onLoggingIn() {
       if (this.validate()) {
           let dataDict = {},
@@ -80,8 +87,8 @@ class LoginModal extends React.Component {
       <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing }>
         <h1 className="modal-header">Log in</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
-        <input type="text" ref="email" className="modal-input" placeholder="Email" />
-        <input type="password" ref="password" className="modal-input" placeholder="Password" />
+        <input type="text" ref="email" className="modal-input" placeholder="Email" onKeyDown={ this.onKeyPressed.bind(this) } />
+        <input type="password" ref="password" className="modal-input" placeholder="Password" onKeyDown={ this.onKeyPressed.bind(this) } />
         <button className="modal-button" onClick={ this.onLoggingIn.bind(this) }>Log in</button>
         <hr className="modal-hr" />
         <h6 className="modal-subheader">Don't have an account?</h6>
@@ -115,6 +122,13 @@ LoginModal.defaultProps = {
 
 // SignupModal - a component that encapsulates the modal for signing up a user
 class SignupModal extends React.Component {
+    
+  onKeyPressed(e) {
+    let keyCode = e.which || e.keyCode;
+    if (keyCode == 13) {
+      this.onSigningUp();
+    }
+  }
 
   // Called when the signup button is called - additional logic to deal with validation here
   onSigningUp() {
@@ -162,12 +176,12 @@ class SignupModal extends React.Component {
       <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing }>
         <h1 className="modal-header">Sign up</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
-        <input type="text" ref="authCode" className="modal-input" placeholder="Authentication code"/>
-        <input type="text" ref="fName" className="modal-input modal-input-first-name" placeholder="First name" />
-        <input type="text" ref="lName" className="modal-input modal-input-last-name" placeholder="Last name" />
-        <input type="text" ref="email" className="modal-input" placeholder="Email address (non-bsd preferable)" />
-        <input type="password" ref="pwd" className="modal-input modal-input-first-name" placeholder="Password" />
-        <input type="password" ref="confPwd" className="modal-input modal-input-last-name" placeholder="Confirm password" />
+        <input type="text" ref="authCode" className="modal-input" placeholder="Authentication code" onKeyDown={ this.onKeyPressed.bind(this) } />
+        <input type="text" ref="fName" className="modal-input modal-input-first-name" placeholder="First name" onKeyDown={ this.onKeyPressed.bind(this) } />
+        <input type="text" ref="lName" className="modal-input modal-input-last-name" placeholder="Last name" onKeyDown={ this.onKeyPressed.bind(this) } />
+        <input type="text" ref="email" className="modal-input" placeholder="Email address (non-bsd preferable)" onKeyDown={ this.onKeyPressed.bind(this) } />
+        <input type="password" ref="pwd" className="modal-input modal-input-first-name" placeholder="Password" onKeyDown={ this.onKeyPressed.bind(this) } />
+        <input type="password" ref="confPwd" className="modal-input modal-input-last-name" placeholder="Confirm password" onKeyDown={ this.onKeyPressed.bind(this) } />
         <button className="modal-button" onClick={ this.onSigningUp.bind(this) }>Sign up</button>
         <hr className="modal-hr" />
         <h6 className="modal-subheader">Have an account?</h6>
@@ -200,6 +214,13 @@ SignupModal.defaultProps = {
 
 // AlumModal - a component that encapsulates the modal for signing up a user
 class AlumModal extends React.Component {
+    
+  onKeyPressed(e) {
+    let keyCode = e.which || e.keyCode;
+    if (keyCode == 13) {
+      this.onRegistering();
+    }
+  }
 
   // Called when the signup button is called - additional logic to deal with validation here
   onRegistering() {
@@ -244,10 +265,10 @@ class AlumModal extends React.Component {
       <Modal isOpen={ this.props.isOpen } onClosed={ this.props.onClosing }>
         <h1 className="modal-header">Add an Alum</h1>
         <button className="modal-close-button" onClick={ this.props.onClosing } />
-        <input type="text" ref="authCode" className="modal-input" placeholder="Authentication Code" />
-        <input type="text" ref="fName" className="modal-input modal-input-first-name" placeholder="First name" />
-        <input type="text" ref="lName" className="modal-input modal-input-last-name" placeholder="Last name" />
-        <input type="text" ref="email" className="modal-input" placeholder="Email address (non-bsd preferable)" />
+        <input type="text" ref="authCode" className="modal-input" placeholder="Authentication Code" onKeyDown={ this.onKeyPressed.bind(this) } />
+        <input type="text" ref="fName" className="modal-input modal-input-first-name" placeholder="First name" onKeyDown={ this.onKeyPressed.bind(this) } />
+        <input type="text" ref="lName" className="modal-input modal-input-last-name" placeholder="Last name" onKeyDown={ this.onKeyPressed.bind(this) } />
+        <input type="text" ref="email" className="modal-input" placeholder="Email address (non-bsd preferable)" onKeyDown={ this.onKeyPressed.bind(this) } />
         <button className="modal-button" onClick={ this.onRegistering.bind(this) }>Register</button>
       </Modal>
     );

@@ -47,7 +47,7 @@ class App extends React.Component {
       "isLoggedIn": props.isLoggedIn // State variable representing whether or not the user is logged in
     };
   }
-
+  
 
   // The next 4 methods are relatively self-explanatory, I hope.
   openSignupModal()  {
