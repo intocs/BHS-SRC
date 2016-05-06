@@ -19,7 +19,21 @@ module.exports = function(API, app) {
           return;
         }
               
-        var questions = u.qIDs;
+        Question.find({"_id": { $in: u.qIDs}, "isPublic": true}, function(err, qs) {
+            res.status(200).send(JSON.stringify(
+                qs.map((m) => {
+                    questionTitle: m.questionTitle,
+                    questionBody: m.questionBody,
+                    author: m.author,
+                    answers: m.answers.map((a) => {
+                        answerBody: a.answerBody,
+                        author: a.author,
+                        date: a.date
+                    }),
+                    date: m.date
+                }) //
+            ));
+        });
       });
     }
   });
