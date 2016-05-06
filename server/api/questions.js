@@ -49,7 +49,7 @@ module.exports = function(API, app) {
       return;
     }
     if (req.body.number !== undefined) {
-      Question.find({}).limit(req.body.number).sort({date: -1}).exec(function(err, qs) {
+      Question.find({}).limit(parseInt(req.body.number)).sort({date: -1}).exec(function(err, qs) {
         if (err) {
           console.log(err);
           return;

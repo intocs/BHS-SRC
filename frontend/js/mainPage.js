@@ -47,6 +47,7 @@ class App extends React.Component {
       "isLoggedIn": props.isLoggedIn, // State variable representing whether or not the user is logged in
       "curQuestionData": []
     };
+    this.requestCurQuestionData();
   }
 
 
@@ -177,26 +178,34 @@ class App extends React.Component {
   }
 
   requestCurQuestionData() {
+    console.log("hi");
     $.ajax({
       "type": "POST",
       "url": "/api/questions/retrieveByNumber",
       "data": {
         "number": 10,
       },
+      "headers": {
+        "Authorization": "Bearer " + window.localStorage.jwtToken
+      },
       "success": function(data) {
+        console.log(data);
         this.setState({"curQuestionData": JSON.parse(data)});
       }.bind(this),
       "error": function(xhr, type, err) {
-        // console.log("qdata request ERROR [", xhr, type, err, "]");
+        console.log("qdata request ERROR [", xhr, type, err, "]");
       }
     });
   }
 
   render() {
+    console.log("hi");
     // If logged in...
     if (this.state.isLoggedIn) {
       // Retrieve the account data from the JWT
       let accData = JSON.parse(atob(localStorage.jwtToken.split(".")[1]));
+      console.log("hi");
+
       return (
         <div className="app">
           <div className="appContent">
@@ -205,13 +214,13 @@ class App extends React.Component {
             </Header>
             <div id="questionContainer">
               <SearchBar onSearchSubmitted={ this.submitSearch.bind(this) }/>
-              <QuestionList questionDataList={ testData.QUESTIONDATA } />
+              <QuestionList questionDataList={ this.state.curQuestionData } />
             </div>
           </div>
         </div>
       );
     } else {
-      this.requestCurQuestionData();
+
       return (
         <div className="app">
           <div className={"appContent" + (this.state.signupModalOpen || this.state.loginModalOpen || this.state.alumModalOpen ? " blurred" : "")}>
@@ -221,7 +230,7 @@ class App extends React.Component {
               <button id="alumButton" className="headerButton" onClick={ this.openAlumModal.bind(this) }>Register an Alum</button>
             </Header>
             <div id="questionContainer">
-              <QuestionList questionDataList={ this.state.curQuestionData } />
+              <QuestionList questionDataList={ testData.QUESTIONDATA } />
             </div>
           </div>
           <SignupModal isOpen={ this.state.signupModalOpen }

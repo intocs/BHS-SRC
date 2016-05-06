@@ -11,7 +11,7 @@ class QuestionObject extends React.Component {
     return (
       <div className="questionContainer">
         <h3 className="questionHeader">{ this.props.questionData.questionTitle }</h3>
-        <h5 className="questionSpec">Answered by N | Asked by { this.props.author }</h5>
+        <h5 className="questionSpec">Answered { this.props.questionData.answers.length } times | Asked by { this.props.questionData.author }</h5>
         <div className="questionContent">{ this.props.questionData.questionBody }</div>
       </div>
     );
