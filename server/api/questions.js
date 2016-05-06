@@ -65,7 +65,10 @@ module.exports = function(API, app) {
   });
 
   app.post('/api/email/parse', function (req, res) {
-    var from = req.body.from;
+    var emailRegex = /[\s\S]+<([^@\(\)\[\]\"\:\;\\\?<>\,]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9]+)>|([^@\(\)\[\]\"\:\;\\\?<>\,]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9]+)/;
+
+    var fromMatch = req.body.from.match(emailRegex);
+    var from = formMatch[1] || fromMatch[2];
     var qId = req.body.to.match(/mailer-(.+)@broncosconnect\.org/i)[1];
     var text = req.body.text;
 
