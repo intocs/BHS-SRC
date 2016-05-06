@@ -12,6 +12,10 @@ var sanitize = require('mongo-sanitize');
 
 module.exports = function(API, app) {
   app.post(API + "/retrieveByEmail", (req, res) => {
+    if (!req.user) {
+      res.status(400).send("No authentication");
+      return;
+    }
     if (req.body.email !== undefined) {
       User.findOne({email: req.body.email}, function(err, u) {
         if (!u) {
@@ -35,6 +39,50 @@ module.exports = function(API, app) {
             ));
         });
       });
+    }
+  });
+
+  app.post(API + "/retrieveByNumber", (req, res) => {
+    console.log(req.body);
+    if (!req.user) {
+      res.status(400).send("No authentication");
+      return;
+    }
+    if (req.body.number !== undefined) {
+      Question.find({}).limit(req.body.number).sort({date: -1}).exec(function(err, qs) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        if (!qs) {
+          res.status(400).send("no answers");
+          return;
+        }
+
+        qs.map(function(q) {
+          User.findById(q.author, function(err, u) {
+            res.status(200).send(JSON.stringify(
+                qs.map((m) => ({
+                    questionTitle: (m.questionTitle),
+                    questionBody: (m.questionBody),
+                    author: u.fName + " " + u.lName,
+                    answers: m.answers.map((a) => ({
+                        answerBody: a.answerBody,
+                        author: a.author,
+                        date: a.date
+                    })),
+                    date: m.date
+                }))
+            ));
+          });
+        });
+
+
+      });
+
+    } else {
+      res.status(400).send("no number");
+      return;
     }
   });
 

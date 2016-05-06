@@ -1,37 +1,30 @@
 let React = require("react");
 
-let QuestionObject = React.createClass({
-  // QuestionObject - ReactJS encapsulation of the HTML features associated
-  //  with a question being displayed on the page.
+// QuestionObject - ReactJS encapsulation of the HTML features associated
+//  with a question being displayed on the page.
+
+
+class QuestionObject extends React.Component {
 
   // render: returns the pseudo-HTML of a question.
-  render: function() {
-
-    // N.B. "className" is used to refer to the "class" of an HTML tag.
-    //  Because "class" is a reserved keyword in JS, ReactJS uses "className" instead.
+  render() {
     return (
       <div className="questionContainer">
-        <h3 className="questionHeader">{ this.props.questionData.question }</h3>
-        <h5 className="questionSpec">Answered by { this.props.questionData.responder }, { this.props.questionData.responderCredentials } | Asked by { this.props.questionData.asker }</h5>
-        <div className="questionContent">{ this.props.questionData.answer }</div>
+        <h3 className="questionHeader">{ this.props.questionData.questionTitle }</h3>
+        <h5 className="questionSpec">Answered by N | Asked by { this.props.author }</h5>
+        <div className="questionContent">{ this.props.questionData.questionBody }</div>
       </div>
     );
   }
-});
+}
 
-let QuestionList = React.createClass({
-  // QuestionList - ReactJS encapsulation of the HTML features associated
-  //  with a list of questions being displayed on the page.
-
-  // render: returns the pseudo-HTML of a list of questions.
-
-  render: function() {
-
+class QuestionList extends React.Component {
+  render() {
     // Maps each element of "data" (which is a js object containing info abt
     //  a comment) to a ReactJS class instance of the QuestionObject class.
     //  each QuestionObject is a "data" value in accordance with whichever
     //  comment object is is from.
-    let questionNodes = this.props.questionDataList.map( questionData => (<QuestionObject questionData={questionData} />) );
+    let questionNodes = this.props.questionDataList.map( questionData => (<QuestionObject questionData={ questionData } />) );
 
     // (I like arrow functions. So sue me.)
 
@@ -42,7 +35,7 @@ let QuestionList = React.createClass({
       </div>
     );
   }
-});
+}
 
 // Export the QuestionList and QuestionObject classes so that the main js file can access them.
 module.exports = {

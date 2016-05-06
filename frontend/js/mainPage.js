@@ -44,12 +44,13 @@ class App extends React.Component {
       "signupModalOpen": false,      // State variable representing whether the signup modal is open
       "loginModalOpen": false,       // State variable representing whether the login modal is open
       "alumModalOpen": false,
-      "isLoggedIn": props.isLoggedIn // State variable representing whether or not the user is logged in
+      "isLoggedIn": props.isLoggedIn, // State variable representing whether or not the user is logged in
+      "curQuestionData": []
     };
   }
-  
 
-  // The next 4 methods are relatively self-explanatory, I hope.
+
+  // The next 6 methods are relatively self-explanatory, I hope.
   openSignupModal()  {
       disableScrolling();
       this.setState({"signupModalOpen": true });
@@ -175,6 +176,22 @@ class App extends React.Component {
     location.href = `/ask?q=${ encodeURIComponent(query) }`;
   }
 
+  requestCurQuestionData() {
+    $.ajax({
+      "type": "POST",
+      "url": "/api/questions/retrieveByNumber",
+      "data": {
+        "number": 10,
+      },
+      "success": function(data) {
+        this.setState({"curQuestionData": JSON.parse(data)});
+      }.bind(this),
+      "error": function(xhr, type, err) {
+        // console.log("qdata request ERROR [", xhr, type, err, "]");
+      }
+    });
+  }
+
   render() {
     // If logged in...
     if (this.state.isLoggedIn) {
@@ -194,6 +211,7 @@ class App extends React.Component {
         </div>
       );
     } else {
+      this.requestCurQuestionData();
       return (
         <div className="app">
           <div className={"appContent" + (this.state.signupModalOpen || this.state.loginModalOpen || this.state.alumModalOpen ? " blurred" : "")}>
@@ -203,7 +221,7 @@ class App extends React.Component {
               <button id="alumButton" className="headerButton" onClick={ this.openAlumModal.bind(this) }>Register an Alum</button>
             </Header>
             <div id="questionContainer">
-              <QuestionList questionDataList={ testData.QUESTIONDATA } />
+              <QuestionList questionDataList={ this.state.curQuestionData } />
             </div>
           </div>
           <SignupModal isOpen={ this.state.signupModalOpen }
