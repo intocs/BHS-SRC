@@ -26,4 +26,7 @@ var QuestionSchema = new mongoose.Schema({
 });
 
 // expose the model to the app
-module.exports = mongoose.model("Question", QuestionSchema);
+module.exports = {
+  Question: mongoose.model("Question", QuestionSchema),
+  Answer: mongoose.model("Answer", AnswerSchema)
+};

@@ -36,7 +36,7 @@ module.exports = function(API, app) {
       }
     }
 
-    Alum.find({email: req.body.email}, function(err, count) {
+    Alum.count({email: req.body.email}, function(err, count) {
       if (err) {
         res.status(500).send("error testing for duplicate email");
         return;

@@ -1,6 +1,9 @@
 // questions.js - Controls routes for question part of API
 
-var Question = require("../models/question.js");
+var QuestionObjs = require("../models/question.js"),
+    Question = QuestionObjs.Question,
+    Answer = QuestionObjs.Answer;
+
 var User = require("../models/user.js");
 var Alum = require("../models/alum.js");
 
@@ -37,10 +40,11 @@ module.exports = function(API, app) {
               var email = new sendgrid.Email({
               	to: alum.email,
               	toname: alum.fName + " " + alum.lName,
-              	from: "mailer@broncosconnect.org",
+              	from: "mailer-" + savedQ.id + "@broncosconnect.org",
               	fromname: "BroncosConnect",
               	subject: req.body.title,
-              	text: req.body.body
+              	text: req.body.body,
+                html: req.body.body.replace(/\n/g, "<br/>")
               });
 
               sendgrid.send(email);
@@ -58,5 +62,49 @@ module.exports = function(API, app) {
       return;
     }
 
+  });
+
+  app.post('/api/email/parse', function (req, res) {
+    var from = req.body.from;
+    var qId = req.body.to.match(/mailer-(.+)@broncosconnect\.org/i)[1];
+    var text = req.body.text;
+
+    function parseEmail(text) {
+      var HDR1_REGEX = /(?!On[\s\S]*On\s[\s\S]+?wrote:)(On\s([\s\S]+?)wrote:)[\s\S]*$/m;
+      var HDR2_REGEX = /From: BroncosConnect[\s\S]*$/m;
+      var otext = text.replace(HDR1_REGEX, "").replace(HDR2_REGEX, "").replace(/(^\s+|\s+$)/g, "");
+      return otext;
+    }
+
+    var responseText = parseEmail(text);
+
+    Alum.findOne({email: from}, function(err, alum) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      if (alum) {
+        Question.findById(qId, function(err, q) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          if (!q) {
+            console.log("No question object found w/ given ID");
+            return;
+          }
+          q.answers.push(new Answer({
+            answerBody: responseText,
+            author: alum.fName + " " + alum.lName,
+            date: new Date()
+          }));
+        });
+      } else {
+        console.log("Weird sender: " + from);
+      }
+
+    });
+
+    res.status(200).send();
   });
 };

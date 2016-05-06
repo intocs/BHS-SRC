@@ -62,26 +62,10 @@ app.get('/addAlum', (req, res) => {
   });
 });
 
-// All of the routes for the users API
+// All of the routes for the various things
 require("./server/api/users")("/api/users", app);
 require("./server/api/alumni")("/api/alumni", app);
 require("./server/api/questions")("/api/questions", app);
-
-app.post('/api/email/parse', function (req, res) {
-  var from = req.body.from;
-  var text = req.body.text;
-  var subject = req.body.subject;
-  function parseEmail(text) {
-    var ID_REGEX = /\[ID=(\S+)\] DO NOT DELETE!/; //
-    var id = text.match(ID_REGEX)[1];
-    var HDR1_REGEX = /(?!On[\s\S]*On\s[\s\S]+?wrote:)(On\s([\s\S]+?)wrote:)[\s\S]*$/m;
-    var HDR2_REGEX = /From: BroncosConnect[\s\S]*$/m;
-    var otext = text.replace(HDR1_REGEX, "").replace(HDR2_REGEX, "").replace(/(^\s+|\s+$)/g, "");
-    return otext;
-  }
-
-  res.status(200).send();
-});
 
 // Tell the Express App to start listening
 app.listen(PORT, () => {
