@@ -11,6 +11,19 @@ var sanitize = require('mongo-sanitize');
 
 
 module.exports = function(API, app) {
+  app.post(API + "/retrieveByEmail", (req, res) => {
+    if (req.body.email !== undefined) {
+      User.findOne({email: req.body.email}, function(err, u) {
+        if (!u) {
+          res.status(400).send("No user matching reqs. Though you are a l33t haxorz for figuring out our server secret");
+          return;
+        }
+              
+        var questions = u.qIDs;
+      });
+    }
+  });
+    
   app.post(API + "/ask", (req, res) => {
 
     if (req.user !== undefined) {
