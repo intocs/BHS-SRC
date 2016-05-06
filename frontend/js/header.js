@@ -6,7 +6,7 @@ class Header extends React.Component {
   render() {
     return (
       <header>
-        <h1 className="pageHeader">BroncosConnect</h1>
+        <a href="/"><h1 className="pageHeader">BroncosConnect</h1></a>
         { this.props.children }
         <hr className="headerLine" />
       </header>
@@ -28,17 +28,30 @@ class UserDropdown extends React.Component {
   // Self-explanatory
   showDropdown() {
     this.setState({"isDropdownVisible": true});
+    $(".dropdown-opttablecontainer").css({"transform": "scaleY(1)"});
+    $(".fa-chevron-down").css({"-webkit-transform": "rotate(180deg)", "-moz-transform": "rotate(180deg)", "transform": "rotate(180deg)"});
   }
 
   hideDropdown() {
     this.setState({"isDropdownVisible": false});
+    $(".dropdown-opttablecontainer").css({"transform": "scaleY(0)"});
+    $(".fa-chevron-down").css({"-webkit-transform": "rotate(0deg)", "-moz-transform": "rotate(0deg)", "transform": "rotate(0deg)"});
   }
-
+  
   render() {
     // If the dropdown is not currently visible
     if (!this.state.isDropdownVisible) {
       return (
-        <div className="dropdown-mainbutton" onClick={ this.showDropdown.bind(this) }>Hi { this.props.username }! <i className="fa fa-chevron-down"></i></div>
+        <div className="dropdown-mainbutton" onClick={ this.showDropdown.bind(this) }>
+            Hi { this.props.username }! <i className="fa fa-chevron-down"></i>
+          <div className="dropdown-opttablecontainer">
+            <table className="dropdown-opttable"><tbody>
+                <tr><td onClick={ this.props.onLogOut }>Log out</td></tr>
+                <tr><td>Thing #1</td></tr>
+                <tr><td>Thing #2</td></tr>
+            </tbody></table>
+          </div>
+        </div>
       );
     } else {
       return (
@@ -55,6 +68,7 @@ class UserDropdown extends React.Component {
       );
     }
   }
+  
 }
 
 UserDropdown.propTypes = {

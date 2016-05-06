@@ -260,7 +260,7 @@ header {
 .dropdown-mainbutton {
   display: block;
   position: absolute;
-  right: 20px;
+  right: 28px;
   top: 15px;
   cursor: pointer;
   -moz-user-select: none;
@@ -269,33 +269,75 @@ header {
   -ms-touch-select: none;
 }
 
+.fa {
+  -webkit-transition: -webkit-transform .2s ease-in-out;
+  -moz-transition: -moz-transform .2s ease-in-out;
+  -ms-transition: -ms-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out
+}
+
 .dropdown-opttablecontainer {
   position: absolute;
-  top: 20px;
-  right: 0;
+  top: 30px;
+  right: -13px;
   width: 130px;
+  transform-origin: top;
+  -webkit-transform: scaleY(0);
+  -moz-transform: scaleY(0);
+  -ms-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transition: -webkit-transform .2s ease-in-out;
+  -moz-transition: -moz-transform .2s ease-in-out;
+  -ms-transition: -ms-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out
 }
 
 .dropdown-opttable {
   background-color: white;
   width: 130px;
-  border: 1px solid rgb(110, 110, 110);
+  border: 1px solid rgb(140, 10, 10);
+  border-radius: 4px;
   border-spacing: 0;
+  z-index: 4;
 }
 
 .dropdown-opttable td {
   padding: 8px;
-  border-bottom: 1px solid rgb(110, 110, 110);
-  background-color: rgb(161, 161, 161);
-  transition: background-color 0.4s;
+  border-bottom: 1px solid rgb(140, 10, 10);
 }
 
 .dropdown-opttable td:hover {
-  background-color: rgb(136, 136, 136);
+  background-color: rgb(226, 226, 240);
 }
 
 .dropdown-opttable tr:last-child td {
   border-bottom: none;
+}
+
+.dropdown-opttable:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0 8px 8px;
+    border-color: white transparent;  
+    display: block;
+    width: 0;
+    z-index: 5;
+    top: -7px;
+    left: 101px;
+}
+
+.dropdown-opttable:before {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0 9px 9px;
+    border-color: rgb(140, 10, 10) transparent;
+    display: block;
+    width: 0;
+    z-index: 0;
+    top: -8.5px;
+    left: 100px;
 }
 
 /* End user dropdown styles */
