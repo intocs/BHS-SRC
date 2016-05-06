@@ -1,6 +1,3 @@
-
-
-
 var Alum = require("../models/alum.js");
 
 var bcrypt = require("bcrypt");

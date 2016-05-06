@@ -18,26 +18,26 @@ module.exports = function(API, app) {
           res.status(400).send("No user matching reqs. Though you are a l33t haxorz for figuring out our server secret");
           return;
         }
-              
+
         Question.find({"_id": { $in: u.qIDs}, "isPublic": true}, function(err, qs) {
             res.status(200).send(JSON.stringify(
-                qs.map((m) => {
-                    questionTitle: m.questionTitle,
-                    questionBody: m.questionBody,
-                    author: m.author,
-                    answers: m.answers.map((a) => {
+                qs.map((m) => ({
+                    questionTitle: (m.questionTitle),
+                    questionBody: (m.questionBody),
+                    author: u.fName + " " + u.lName,
+                    answers: m.answers.map((a) => ({
                         answerBody: a.answerBody,
                         author: a.author,
                         date: a.date
-                    }),
+                    })),
                     date: m.date
-                }) //
+                }))
             ));
         });
       });
     }
   });
-    
+
   app.post(API + "/ask", (req, res) => {
 
     if (req.user !== undefined) {
@@ -56,7 +56,9 @@ module.exports = function(API, app) {
           answers: [],
           date: new Date()
         }).save(function(err, savedQ) {
-          u.qIDs.push(savedQ.id);
+          u.update({$push: {qIDs: savedQ.id}}, function(err) {
+            if (err) console.log(err);
+          });
 
           var sendgrid = require("sendgrid")("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");
 
@@ -120,7 +122,7 @@ module.exports = function(API, app) {
           date: new Date()
         };
         Question.update({"_id": qId}, {$push: {'answers': newAnswerObject}}, function(err) {
-          console.log(err);
+          if (err) console.log(err);
         });
       } else {
         console.log("Weird sender: " + from);
