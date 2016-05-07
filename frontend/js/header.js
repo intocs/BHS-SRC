@@ -25,15 +25,19 @@ class UserDropdown extends React.Component {
     };
   }
 
-  // Self-explanatory
+  // Self-explanatory (not really)
+  // TODO: Make the chevron always rotate clockwise (meh)
+  // Also all the styling stuff being tacked on to these function is absolutely fine
   showDropdown() {
     this.setState({"isDropdownVisible": true});
+    $(".dropdown-mainbutton").css({"background-color": "#A4101A"});
     $(".dropdown-opttablecontainer").css({"transform": "scaleY(1)"});
     $(".fa-chevron-down").css({"-webkit-transform": "rotate(180deg)", "-moz-transform": "rotate(180deg)", "transform": "rotate(180deg)"});
   }
 
   hideDropdown() {
     this.setState({"isDropdownVisible": false});
+    $(".dropdown-mainbutton").css({"background-color": "#D0021B"});
     $(".dropdown-opttablecontainer").css({"transform": "scaleY(0)"});
     $(".fa-chevron-down").css({"-webkit-transform": "rotate(0deg)", "-moz-transform": "rotate(0deg)", "transform": "rotate(0deg)"});
   }
