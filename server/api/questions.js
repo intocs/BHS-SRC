@@ -100,10 +100,12 @@ module.exports = function(API, app) {
           return;
         }
 
+        var sentBody = req.body.title + "\n----------\n" + req.body.body;
+
         new Question({
           isPublic: true,
           questionTitle: req.body.title,
-          questionBody: req.body.body,
+          questionBody: sentBody,
           author: u.id,
           answers: [],
           date: new Date()
@@ -124,8 +126,8 @@ module.exports = function(API, app) {
               	from: "mailer-" + savedQ.id + "@broncosconnect.org",
               	fromname: "BroncosConnect",
               	subject: req.body.title,
-              	text: req.body.body,
-                html: req.body.body.replace(/\n/g, "<br/>")
+              	text: sentBody,
+                html: sentBody.replace(/\n/g, "<br/>")
               });
 
               sendgrid.send(email);
