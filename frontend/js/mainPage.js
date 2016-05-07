@@ -206,7 +206,6 @@ class App extends React.Component {
     if (this.state.isLoggedIn) {
       // Retrieve the account data from the JWT
       let accData = JSON.parse(atob(localStorage.jwtToken.split(".")[1]));
-      console.log("hi");
 
       return (
         <div className="app">

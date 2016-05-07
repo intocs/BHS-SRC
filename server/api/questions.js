@@ -59,21 +59,25 @@ module.exports = function(API, app) {
           return;
         }
 
+        var questionDataList = []
+
         qs.map(function(q) {
           User.findById(q.author, function(err, u) {
-            res.status(200).send(JSON.stringify(
-                qs.map((m) => ({
-                    questionTitle: (m.questionTitle),
-                    questionBody: (m.questionBody),
-                    author: u.fName + " " + u.lName,
-                    answers: m.answers.map((a) => ({
-                        answerBody: a.answerBody,
-                        author: a.author,
-                        date: a.date
-                    })),
-                    date: m.date
-                }))
-            ));
+            questionDataList.push({
+                questionTitle: (q.questionTitle),
+                questionBody: (q.questionBody),
+                author: u.fName + " " + u.lName,
+                answers: q.answers.map((a) => ({
+                    answerBody: a.answerBody,
+                    author: a.author,
+                    date: a.date
+                })),
+                date: q.date
+            });
+
+            if (questionDataList.length >= qs.length) {
+              res.status(200).send(JSON.stringify(questionDataList));
+            }
           });
         });
 
