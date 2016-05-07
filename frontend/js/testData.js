@@ -3,23 +3,20 @@
 
 module.exports = {
   QUESTIONDATA: [ {
-    question: "How's the water at UM in Flint, MI?",
-    asker: "John Lastname",
-    responder: "Plssendhelp",
-    responderCredentials: "Flint, MI",
-    answer: "AUUGGGGGGHHHH!!!!!"
+    questionTitle: "How's the water at UM in Flint, MI?",
+    questionBody: "Well, how is it?",
+    author: "John Lastname",
+    answers: []
   }, {
-    question: "What's the food like at UT Austin?",
-    asker: "Vinay T.",
-    responder: "Some guy",
-    responderCredentials: "Austin, TX",
-    answer: "Literally the most delicious food I've never tasted..."
+    questionTitle: "What's the food like at UT Austin?",
+    questionBody: "Well, I hear it's super tasty... So how is it?",
+    author: "Vinay T.",
+    answers: []
   }, {
-    question: "How do you spell Vijay's and Vinay's last name?",
-    asker: "John Lastname",
-    responder: "Vinay T.",
-    responderCredentials: "Barrington, IL",
-    answer: "TRIPURANEANENIANEEAEENENAENI!!!!!!!"
+    questionTitle: "How do you spell Vijay's and Vinay's last name?",
+    questionBody: "I was just wondering for linguistic reasons",
+    author: "John Lastname",
+    answers: []
   }
 ]
 };

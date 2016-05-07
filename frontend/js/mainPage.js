@@ -47,7 +47,7 @@ class App extends React.Component {
       "isLoggedIn": props.isLoggedIn, // State variable representing whether or not the user is logged in
       "curQuestionData": []
     };
-    this.requestCurQuestionData();
+    if (window.localStorage.jwtToken) this.requestCurQuestionData();
   }
 
 
@@ -100,6 +100,7 @@ class App extends React.Component {
 
         // Set the state to not being logged in, to display the private part of the UI
         this.setState({"isLoggedIn": true});
+        this.requestCurQuestionData();
       }.bind(this),
       "error": function(xhr, type, err) {
         // console.log("LOGIN ERROR [", xhr, type, err, "]");
@@ -112,6 +113,7 @@ class App extends React.Component {
     // Remove the token and set the state
     window.localStorage.removeItem("jwtToken");
     this.setState({"isLoggedIn": false});
+    this.setState({"curQuestionData": []});
   }
 
   // Sign Up!
