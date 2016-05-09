@@ -53,7 +53,10 @@ a:hover {
   text-decoration: none;
 }
 header {
-  position: relative;
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+  top: 0;
   background-color: #D0021B;
   box-shadow: 0px 0px 10px #606060;
   height: 58px;
