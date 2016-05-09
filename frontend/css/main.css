@@ -55,7 +55,7 @@ a:hover {
 header {
   position: relative;
   background-color: #D0021B;
-  box-shadow: 0px 0px 10px #606060;
+  box-shadow: 0 0 10px #606060;
   height: 58px;
 }
 .appContent {
@@ -71,9 +71,10 @@ header {
 .pageHeader {
   display: inline-block;
   margin: 5px;
-  font-size: 2.25em;
+  font-size: 2.5em;
   font-weight: normal;
   color: #FFFFFF;
+  height: calc(100% - 10px);
 }
 .headerLine {
   height: 2px;
@@ -83,7 +84,7 @@ header {
   color: #4A4A4A;
   border: 0 none;
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   width: 100%;
 }
 .headerButton {
@@ -269,22 +270,27 @@ header {
 
 .dropdown-mainbutton {
   height: 19px;
+  font-size: 20px;
   display: block;
   position: absolute;
   right: 18px;
-  top: 0px;
-  padding-top: 19.5px;
+  top: 0;
+  padding-top: 18.5px;
   padding-right: 10px;
   padding-left: 10px;
-  padding-bottom: 17.5px; /* two less because line */
+  padding-bottom: 18.5px; /* two less because line */
   margin-bottom: 2px;
   cursor: pointer;
+
+
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   -ms-touch-select: none;
+  user-select: none;
+
   z-index: 5;
-  color: #4A4A4A;
+  color: #ffffff;
   /* border-left: .5px solid #4A4A4A; for testing purposes */
   /* border-right: .5px solid #4A4A4A; */
 }
@@ -302,10 +308,12 @@ header {
 
 .dropdown-opttablecontainer {
   position: absolute;
-  top: 46px;
-  right: -8px;
+  font-size: 16px;
+  top: 48px;
+  right: -6px;
   width: 130px;
   transform-origin: top;
+  color: #4f4f4f;
   -webkit-transform: scaleY(0);
   -moz-transform: scaleY(0);
   -ms-transform: scaleY(0);
@@ -313,7 +321,7 @@ header {
   -webkit-transition: -webkit-transform .2s ease-in-out;
   -moz-transition: -moz-transform .2s ease-in-out;
   -ms-transition: -ms-transform .2s ease-in-out;
-  transition: transform .2s ease-in-out
+  transition: transform .2s ease-in-out;
 }
 
 .dropdown-opttable {
@@ -331,16 +339,20 @@ header {
   overflow: hidden;
 }
 
+.dropdown-opttable td.hidden {
+  color: #808080;
+}
+
 .dropdown-opttable td:hover {
   background-color: #f0f0f0;
 }
 
 .dropdown-opttable tr:first-child td {
-    border-radius: 4px 4px 0px 0px; /* must be the same as parent, or corners will clip */
+    border-radius: 4px 4px 0 0; /* must be the same as parent, or corners will clip */
 }
 
 .dropdown-opttable tr:last-child td {
-  border-radius: 0px 0px 4px 4px; /* must be the same as parent, or corners will clip */
+  border-radius: 0 0 4px 4px; /* must be the same as parent, or corners will clip */
   border-bottom: none;
 }
 
@@ -349,7 +361,7 @@ header {
     position: absolute;
     border-style: solid;
     border-width: 0 8px 8px;
-    border-color: white transparent;  
+    border-color: white transparent;
     display: block;
     width: 0;
     z-index: 5;

@@ -42,14 +42,14 @@ Modal.defaultProps = {
 
 // LoginModal - a component that encapsulates the modal for logging in to the site
 class LoginModal extends React.Component {
-    
+
   onKeyPressed(e) {
     let keyCode = e.which || e.keyCode;
     if (keyCode == 13) {
       this.onLoggingIn();
     }
   }
-  
+
   onLoggingIn() {
       if (this.validate()) {
           let dataDict = {},
@@ -122,7 +122,7 @@ LoginModal.defaultProps = {
 
 // SignupModal - a component that encapsulates the modal for signing up a user
 class SignupModal extends React.Component {
-    
+
   onKeyPressed(e) {
     let keyCode = e.which || e.keyCode;
     if (keyCode == 13) {
@@ -192,7 +192,7 @@ class SignupModal extends React.Component {
 
   componentDidUpdate() {
       if (this.props.isOpen) {
-          this.refs["authentication-input"].focus();
+          this.refs["authCode"].focus();
       }
   }
 
@@ -214,7 +214,7 @@ SignupModal.defaultProps = {
 
 // AlumModal - a component that encapsulates the modal for signing up a user
 class AlumModal extends React.Component {
-    
+
   onKeyPressed(e) {
     let keyCode = e.which || e.keyCode;
     if (keyCode == 13) {

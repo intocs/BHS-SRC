@@ -70,7 +70,7 @@ class App extends React.Component {
       <div className="app">
         <div className="appContent">
           <Header>
-            <UserDropdown username={ accData.given_name } onLogOut={ this.logOut.bind(this) }/>
+            <UserDropdown username={ accData.given_name } askDisabled={true} onLogOut={ this.logOut.bind(this) }/>
           </Header>
           <div className="formContent">
             <input type="text" className="ask-subject" placeholder="Enter your question here..." ref="qtitle" defaultValue={getData.has("q") ? getData.get("q") : ""}/>
