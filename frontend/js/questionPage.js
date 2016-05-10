@@ -34,9 +34,7 @@ class App extends React.Component {
       "success": function(data) {
         // When I get a success message... close the modals.
         //  (DO NOT log in, opens up potential security hole (? NB: Maybe not actually) )
-        data.answers.sort((a, b) => {
-          return new Date(b) - new Date(a);
-        });
+        data.answers.sort((a, b) => new Date(b.date) - new Date(a.date));
         this.setState({curQuestionData: data});
       }.bind(this),
       "error": function(xhr, errorType, error) {
