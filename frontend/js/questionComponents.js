@@ -8,11 +8,21 @@ class QuestionObject extends React.Component {
 
   // render: returns the pseudo-HTML of a question.
   render() {
+    function dateFormat(ds) {
+      var d = new Date(ds);
+      return `${ d.getMonth() + 1 }/${ d.getDate() }/${ d.getFullYear() }`;
+    }
+    var bestAnswer = null;
+    for (let answer of this.props.questionData.answers) {
+      if (bestAnswer === null || bestAnswer.date < answer.date) {
+        bestAnswer = answer;
+      }
+    }
     return (
       <div className="questionContainer">
         <h3 className="questionHeader">{ this.props.questionData.questionTitle }</h3>
-        <h5 className="questionSpec">Answered { this.props.questionData.answers.length } times | Asked by { this.props.questionData.author }</h5>
-        <div className="questionContent">{ this.props.questionData.questionBody }</div>
+        <h5 className="questionSpec">Answered by { bestAnswer.author } on { dateFormat(bestAnswer.date) } | Asked by { this.props.questionData.author } on { dateFormat(this.props.questionData.date) } </h5>
+        <div className="questionContent">{ bestAnswer.answerBody }</div>
       </div>
     );
   }
@@ -24,7 +34,10 @@ class QuestionList extends React.Component {
     //  a comment) to a ReactJS class instance of the QuestionObject class.
     //  each QuestionObject is a "data" value in accordance with whichever
     //  comment object is is from.
-    let questionNodes = this.props.questionDataList.map( questionData => (<QuestionObject questionData={ questionData } />) );
+    let questionNodes = this.props.questionDataList.map( questionData => {
+      if (questionData.answers.length > 0)
+        return (<QuestionObject questionData={ questionData } />);
+    } );
 
     // (I like arrow functions. So sue me.)
 
