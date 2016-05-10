@@ -34,17 +34,14 @@ class App extends React.Component {
       "success": function(data) {
         // When I get a success message... close the modals.
         //  (DO NOT log in, opens up potential security hole (? NB: Maybe not actually) )
+        data.answers.sort((a, b) => {
+          return new Date(b) - new Date(a);
+        });
         this.setState({curQuestionData: data});
       }.bind(this),
       "error": function(xhr, errorType, error) {
         // Something got messed up. TODO: deal with this in a way tht makes sense
         // console.log("SIGNUP ERROR [", type, "]");
-        if (xhr.status == 400) {
-          var errorMsg = xhr.responseText;
-          if (errorMsg == "authCode does not match") {
-            $(this.refs.alummodal.refs.authCode).addClass("invalid");
-          }
-        }
       }.bind(this)
     });
   }

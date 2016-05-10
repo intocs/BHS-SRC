@@ -26,7 +26,7 @@ class FullQuestionObject extends React.Component {
       return (
         <div className="questionAnswer">
           <h5 className="questionSpec">Answered by { answer.author } on { dateFormat(answer.date) } </h5>
-          <div className="questionContent">{ answer.answerBody.replace(/\n/g, "<br/>") }</div>
+          <div className="questionContent">{ answer.answerBody.split("\n").map(line => (<div>{line}</div>)) }</div>
         </div>
       );
     });
@@ -34,6 +34,7 @@ class FullQuestionObject extends React.Component {
 
       <div className="questionContainer">
         <h3 className="questionHeader"><a href={"/question?id=" + this.props.questionData.qId}>{ this.props.questionData.questionTitle }</a></h3>
+        <h5 className="questionSpec">Asked by { this.props.questionData.author } on { dateFormat(this.props.questionData.date) } </h5>
         { questionElems }
       </div>
     );
