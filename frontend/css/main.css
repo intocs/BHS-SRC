@@ -386,3 +386,11 @@ header {
 }
 
 /* End user dropdown styles */
+
+
+.dropdown-opttable td.disabled {
+  color: #8f8f8f;
+}
+.dropdown-opttable td.disabled:hover {
+  background-color: #fff;
+}

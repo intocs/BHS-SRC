@@ -62,6 +62,13 @@ app.get('/addAlum', (req, res) => {
   });
 });
 
+app.get('/question', (req, res) => {
+  res.sendFile("viewQuestion.html", {
+    root: "./frontend"
+  });
+});
+
+
 // All of the routes for the various things
 require("./server/api/users")("/api/users", app);
 require("./server/api/alumni")("/api/alumni", app);

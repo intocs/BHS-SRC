@@ -1,0 +1,10 @@
+.questionContainer {
+  margin-top: 82px;
+  width: 70%;
+  margin-left: calc(50% - (70% / 2));
+}
+
+.questionAnswer {
+  border-bottom: 2px solid rgb(129, 129, 129);
+  padding: 0.5em;
+}

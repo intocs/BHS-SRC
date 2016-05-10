@@ -29,6 +29,7 @@ module.exports = function(API, app) {
                     questionTitle: (m.questionTitle),
                     questionBody: (m.questionBody),
                     author: u.fName + " " + u.lName,
+                    qId: (m._id.toString()),
                     answers: m.answers.map((a) => ({
                         answerBody: a.answerBody,
                         author: a.author,
@@ -43,7 +44,6 @@ module.exports = function(API, app) {
   });
 
   app.post(API + "/retrieveByNumber", (req, res) => {
-    console.log(req.body);
     if (!req.user) {
       res.status(400).send("No authentication");
       return;
@@ -59,7 +59,7 @@ module.exports = function(API, app) {
           return;
         }
 
-        var questionDataList = []
+        var questionDataList = [];
 
         qs.map(function(q) {
           User.findById(q.author, function(err, u) {
@@ -67,6 +67,7 @@ module.exports = function(API, app) {
                 questionTitle: (q.questionTitle),
                 questionBody: (q.questionBody),
                 author: u.fName + " " + u.lName,
+                qId: (q._id.toString()),
                 answers: q.answers.map((a) => ({
                     answerBody: a.answerBody,
                     author: a.author,
@@ -78,6 +79,46 @@ module.exports = function(API, app) {
             if (questionDataList.length >= qs.length) {
               res.status(200).send(JSON.stringify(questionDataList));
             }
+          });
+        });
+
+
+      });
+
+    } else {
+      res.status(400).send("no number");
+      return;
+    }
+  });
+
+  app.post(API + "/retrieveById", (req, res) => {
+    if (!req.user) {
+      res.status(400).send("No authentication");
+      return;
+    }
+    if (req.body.id !== undefined) {
+      Question.findById(req.body.id, function(err, q) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        if (!q) {
+          res.status(400).send("no answers");
+          return;
+        }
+
+        User.findById(q.author, function(err, u) {
+          res.status(200).send({
+              questionTitle: (q.questionTitle),
+              questionBody: (q.questionBody),
+              author: u.fName + " " + u.lName,
+              qId: (q._id.toString()),
+              answers: q.answers.map((a) => ({
+                  answerBody: a.answerBody,
+                  author: a.author,
+                  date: a.date
+              })),
+              date: q.date
           });
         });
 
@@ -147,7 +188,7 @@ module.exports = function(API, app) {
 
   });
 
-  app.post('/api/email/parse', function (req, res) {
+  app.post('/api/email/parse', (req, res) => {
     var emailRegex = /[\s\S]+<([^@\(\)\[\]\"\:\;\\\?<>\,]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9]+)>|([^@\(\)\[\]\"\:\;\\\?<>\,]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9]+)/;
 
     var fromMatch = req.body.from.match(emailRegex);
@@ -186,4 +227,7 @@ module.exports = function(API, app) {
 
     res.status(200).send();
   });
+
+
+
 };
