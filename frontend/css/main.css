@@ -61,6 +61,12 @@ header {
   box-shadow: 0 0 10px #606060;
   height: 58px;
 }
+
+#headerSpacer {
+    height: 80px;
+    width: 100%;
+}
+
 .appContent {
   transition: 0.3s filter linear;
   -webkit-transition: 0.3s -webkit-filter linear;

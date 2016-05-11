@@ -230,6 +230,7 @@ class App extends React.Component {
               <button id="signUpButton" className="headerButton" onClick={ this.openSignupModal.bind(this) }>Sign Up</button>
               <button id="alumButton" className="headerButton" onClick={ this.openAlumModal.bind(this) }>Register an Alum</button>
             </Header>
+            <div id="headerSpacer"></div>
             <div id="questionContainer">
               <QuestionList questionDataList={ testData.QUESTIONDATA } />
             </div>
