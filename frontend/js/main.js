@@ -4,5 +4,6 @@
 window.JS = {
   mainPage: (() => require("./mainPage")),
   ask: (() => require("./askPage")),
-  questionPage: (() => require("./questionPage"))
+  questionPage: (() => require("./questionPage")),
+  myQuestionsPage: (() => require("./myQuestionsPage"))
 };

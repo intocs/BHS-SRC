@@ -68,6 +68,12 @@ app.get('/question', (req, res) => {
   });
 });
 
+app.get('/myQuestions', (req, res) => {
+  res.sendFile("myQuestions.html", {
+    root: "./frontend"
+  });
+});
+
 
 // All of the routes for the various things
 require("./server/api/users")("/api/users", app);

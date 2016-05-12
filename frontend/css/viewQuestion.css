@@ -2,6 +2,7 @@
   margin-top: 82px;
   width: 70%;
   margin-left: calc(50% - (70% / 2));
+  border-bottom: none;
 }
 
 .questionAnswer {
