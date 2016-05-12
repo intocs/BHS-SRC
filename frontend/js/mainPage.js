@@ -26,14 +26,40 @@ let modals = require("./modal"),
 // The next two methods disable and enable scrolling on the page, respectively
 //  They are used to make the modals behave more tamely when they are opened
 
-function disableScrolling(){
-  let x = window.scrollX,
-      y = window.scrollY;
-  window.onscroll = window.scrollTo.bind(window, x, y);
+// left: 37, up: 38, right: 39, down: 40,
+// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+
+function preventDefault(e) {
+  e = e || window.event;
+  if (e.preventDefault)
+      e.preventDefault();
+  e.returnValue = false;  
 }
 
-function enableScrolling(){
-  window.onscroll = function() {};
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+function disableScrolling() {
+  if (window.addEventListener) // older FF
+      window.addEventListener('DOMMouseScroll', preventDefault, false);
+  window.onwheel = preventDefault; // modern standard
+  window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+  window.ontouchmove  = preventDefault; // mobile
+  document.onkeydown  = preventDefaultForScrollKeys;
+}
+
+function enableScrolling() {
+    if (window.removeEventListener)
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    window.onmousewheel = document.onmousewheel = null; 
+    window.onwheel = null; 
+    window.ontouchmove = null;  
+    document.onkeydown = null;  
 }
 
 class App extends React.Component {
@@ -54,28 +80,34 @@ class App extends React.Component {
   // The next 6 methods are relatively self-explanatory, I hope.
   openSignupModal()  {
       disableScrolling();
+      $("#signUpButton").css({"background-color": "#A4101A"});
       this.setState({"signupModalOpen": true });
   }
   closeSignupModal() {
       enableScrolling();
+      $("#signUpButton").css({"background-color": "#D0021B"});
       this.setState({"signupModalOpen": false});
   }
 
   openLoginModal()  {
       disableScrolling();
+      $("#logInButton").css({"background-color": "#A4101A"});
       this.setState({"loginModalOpen": true });
   }
   closeLoginModal() {
       enableScrolling();
+      $("#logInButton").css({"background-color": "#D0021B"});
       this.setState({"loginModalOpen": false});
   }
 
   openAlumModal()  {
       disableScrolling();
+      $("#alumButton").css({"background-color": "#A4101A"});
       this.setState({"alumModalOpen": true });
   }
   closeAlumModal() {
       enableScrolling();
+      $("#alumButton").css({"background-color": "#D0021B"});
       this.setState({"alumModalOpen": false});
   }
 
