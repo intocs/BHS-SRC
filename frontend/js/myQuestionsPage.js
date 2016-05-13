@@ -60,7 +60,7 @@ class App extends React.Component {
       <div className="app">
         <div className="appContent">
           <Header>
-            <UserDropdown username={ accData.given_name } onLogOut={ this.logOut.bind(this) }/>
+            <UserDropdown username={ accData.given_name } myQuestionsDisabled={true} onLogOut={ this.logOut.bind(this) }/>
           </Header>
           <div id="questionContainer">
             <QuestionList questionDataList={ this.state.curQuestionData } />

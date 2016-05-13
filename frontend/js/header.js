@@ -51,6 +51,14 @@ class UserDropdown extends React.Component {
     }
   }
 
+  redirectToMyQuestions(e) {
+    if (!this.props.myQuestionsDisabled) {
+      location.href="/myQuestions";
+    } else {
+      e.stopPropagation();
+    }
+  }
+
   render() {
 
     return (
@@ -58,7 +66,7 @@ class UserDropdown extends React.Component {
         Hi { this.props.username }! <i className="fa fa-chevron-down"></i>
         <div className="dropdown-opttablecontainer">
           <table className="dropdown-opttable"><tbody>
-            <tr><td>My Questions</td></tr>
+            <tr><td onClick={ this.redirectToMyQuestions.bind(this) } className={this.props.myQuestionsDisabled ? "disabled" : ""}>My Questions</td></tr>
             <tr><td onClick={ this.redirectToAsk.bind(this) } className={this.props.askDisabled ? "disabled" : ""}>Ask a Question</td></tr>
             <tr><td onClick={ this.props.onLogOut }>Log out</td></tr>
           </tbody></table>
@@ -71,12 +79,14 @@ class UserDropdown extends React.Component {
 
 UserDropdown.propTypes = {
   "username": React.PropTypes.string, // Property representing what the user should be called
-  "askDisabled": React.PropTypes.bool
+  "askDisabled": React.PropTypes.bool,
+  "myQuestionsDisabled": React.PropTypes.bool
 };
 
 UserDropdown.defaultProps = {
   "username": "Bob", // IDK. Was the first reasonable "default" name I could think of. Feel free to change it.
-  "askDisabled": false
+  "askDisabled": false,
+  "myQuestionsDisabled": false
 };
 
 module.exports = {

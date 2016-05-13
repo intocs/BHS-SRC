@@ -25,7 +25,7 @@ class SearchBar extends React.Component {
             <tr>
               <td className="searchbar-searchicon"><span className="fa fa-search"></span></td>
               <td><input type="text" ref="searchInput" className="searchbar-input" onKeyDown={ this.onKeyPressed.bind(this) }/></td>
-              <td><button className="searchbar-button" onClick={ this.submitSearch.bind(this) }>Search</button></td>
+              <td><button className="searchbar-button" onClick={ this.submitSearch.bind(this) }>Ask</button></td>
             </tr>
           </tbody>
         </table>
