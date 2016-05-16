@@ -9,6 +9,8 @@ var Alum = require("../models/alum.js");
 
 var sanitize = require('mongo-sanitize');
 
+var sendgrid = require("sendgrid")("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");
+
 
 module.exports = function(API, app) {
   app.post(API + "/retrieveByEmail", (req, res) => {
@@ -165,7 +167,6 @@ module.exports = function(API, app) {
             if (err) console.log(err);
           });
 
-          var sendgrid = require("sendgrid")("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");
 
           Alum.find({}, function(err, alumni) {
             for (var i in alumni) {
@@ -227,7 +228,46 @@ module.exports = function(API, app) {
           date: new Date()
         };
         Question.update({"_id": qId}, {$push: {'answers': newAnswerObject}}, function(err) {
-          if (err) console.log(err);
+          if (err) {
+            console.log(err);
+            return;
+          }
+
+
+
+          Question.findById({"_id": qId}, function(err, q) {
+            if (err) {
+              console.log(err);
+              return;
+            }
+
+            User.findById({"_id": q.author}, function(err, u) {
+              if (err) {
+                console.log(err);
+                return;
+              }
+
+              var respBody = "Your Question: " + q.questionBody + "\n";
+              respBody += "Answered by " + alum.fName + " " + alum.lName + "\n";
+              respBody += "Response body:\n" + responseText;
+
+              var email = new sendgrid.Email({
+                to: u.email,
+                toname: u.fName + " " + u.lName,
+                from: "mailer@broncosconnect.org",
+                fromname: "BroncosConnect",
+                subject: "Response to your question: '" + q.questionTitle + "'",
+                text: respBody,
+                html: respBody.replace(/\n/g, "<br/>")
+              });
+
+              sendgrid.send(email);
+            });
+          });
+
+
+
+
         });
       } else {
         console.log("Weird sender: " + from);
