@@ -40,6 +40,10 @@ class QuestionList extends React.Component {
         return (<QuestionObject questionData={ questionData } />);
     } );
 
+    if (questionNodes.length === 0) {
+      questionNodes = (<div>No questions.... yet!</div>);
+    }
+
     // (I like arrow functions. So sue me.)
 
     // Return a simple div containing the question nodes

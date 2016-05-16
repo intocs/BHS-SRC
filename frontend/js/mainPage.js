@@ -34,7 +34,7 @@ function preventDefault(e) {
   e = e || window.event;
   if (e.preventDefault)
       e.preventDefault();
-  e.returnValue = false;  
+  e.returnValue = false;
 }
 
 function preventDefaultForScrollKeys(e) {
@@ -56,10 +56,10 @@ function disableScrolling() {
 function enableScrolling() {
     if (window.removeEventListener)
         window.removeEventListener('DOMMouseScroll', preventDefault, false);
-    window.onmousewheel = document.onmousewheel = null; 
-    window.onwheel = null; 
-    window.ontouchmove = null;  
-    document.onkeydown = null;  
+    window.onmousewheel = document.onmousewheel = null;
+    window.onwheel = null;
+    window.ontouchmove = null;
+    document.onkeydown = null;
 }
 
 class App extends React.Component {
@@ -71,7 +71,8 @@ class App extends React.Component {
       "loginModalOpen": false,       // State variable representing whether the login modal is open
       "alumModalOpen": false,
       "isLoggedIn": props.isLoggedIn, // State variable representing whether or not the user is logged in
-      "curQuestionData": []
+      "curQuestionData": [],
+      "curQuery": []
     };
     if (window.localStorage.jwtToken) this.requestCurQuestionData();
   }
@@ -211,13 +212,18 @@ class App extends React.Component {
     location.href = `/ask?q=${ encodeURIComponent(query) }`;
   }
 
+  searchChanged(newSearch) {
+    this.setState({curQuery: newSearch.split(/\s+/g)});
+    this.requestCurQuestionData();
+  }
+
   requestCurQuestionData() {
-    console.log("hi");
     $.ajax({
       "type": "POST",
       "url": "/api/questions/retrieveByNumber",
       "data": {
         "number": 10,
+        "query": this.state.curQuery
       },
       "headers": {
         "Authorization": "Bearer " + window.localStorage.jwtToken
@@ -227,13 +233,17 @@ class App extends React.Component {
         this.setState({"curQuestionData": JSON.parse(data)});
       }.bind(this),
       "error": function(xhr, type, err) {
-        console.log("qdata request ERROR [", xhr, type, err, "]");
-      }
+        if (xhr.status == 400) {
+          var errorMsg = xhr.responseText;
+          if (errorMsg == "no answers") {
+            this.setState({"curQuestionData": []});
+          }
+        }
+      }.bind(this)
     });
   }
 
   render() {
-    console.log("hi");
     // If logged in...
     if (this.state.isLoggedIn) {
       // Retrieve the account data from the JWT
@@ -246,7 +256,7 @@ class App extends React.Component {
               <UserDropdown username={ accData.given_name } onLogOut={ this.logOut.bind(this) }/>
             </Header>
             <div id="questionContainer">
-              <SearchBar onSearchSubmitted={ this.submitSearch.bind(this) }/>
+              <SearchBar onSearchSubmitted={ this.submitSearch.bind(this) } onChange={ this.searchChanged.bind(this) }/>
               <QuestionList questionDataList={ this.state.curQuestionData } />
             </div>
           </div>

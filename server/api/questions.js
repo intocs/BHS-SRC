@@ -49,12 +49,22 @@ module.exports = function(API, app) {
       return;
     }
     if (req.body.number !== undefined) {
-      Question.find({}).limit(parseInt(req.body.number)).sort({date: -1}).exec(function(err, qs) {
+      var query = [];
+      if (req.body.query) {
+        query = req.body.query;
+      }
+      var qBody = {$and: query.map(function(q) {
+        return {"questionTitle": new RegExp(q, "gi")};
+      }) };
+
+      console.log(qBody.$and.length > 0 ? qBody : {});
+
+      Question.find(qBody.$and.length > 0 ? qBody : {}).limit(parseInt(req.body.number)).sort({date: -1}).exec(function(err, qs) {
         if (err) {
           console.log(err);
           return;
         }
-        if (!qs) {
+        if (!qs || qs.length < 1) {
           res.status(400).send("no answers");
           return;
         }

@@ -13,6 +13,15 @@ class SearchBar extends React.Component {
     }
   }
 
+  onChange(e) {
+    let keyCode = e.which || e.keyCode;
+    if (keyCode != 13) {
+      setTimeout(function() {
+        this.props.onChange(this.refs.searchInput.value);
+      }.bind(this), 250);
+    }
+  }
+
   submitSearch() {
     this.props.onSearchSubmitted(this.refs.searchInput.value);
   }
@@ -24,7 +33,7 @@ class SearchBar extends React.Component {
           <tbody>
             <tr>
               <td className="searchbar-searchicon"><span className="fa fa-search"></span></td>
-              <td><input type="text" ref="searchInput" className="searchbar-input" onKeyDown={ this.onKeyPressed.bind(this) }/></td>
+              <td><input type="text" ref="searchInput" className="searchbar-input" onKeyDown={ this.onKeyPressed.bind(this) } onChange={ this.onChange.bind(this) }/></td>
               <td><button className="searchbar-button" onClick={ this.submitSearch.bind(this) }>Ask</button></td>
             </tr>
           </tbody>
