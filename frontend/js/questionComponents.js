@@ -21,7 +21,7 @@ class QuestionObject extends React.Component {
     return (
 
       <div className="questionContainer">
-        <h3 className="questionHeader"><a href={"/question?id=" + this.props.questionData.qId}>{ this.props.questionData.questionTitle }</a></h3>
+        <h3 className="questionHeader"><a href={"/question?id=" + this.props.questionData.qId} target="_blank">{ this.props.questionData.questionTitle }</a></h3>
         <h5 className="questionSpec">Answered by { bestAnswer.author } on { dateFormat(bestAnswer.date) } | Asked by { this.props.questionData.author } on { dateFormat(this.props.questionData.date) } </h5>
         <div className="questionContent">{ bestAnswer.answerBody }</div>
       </div>

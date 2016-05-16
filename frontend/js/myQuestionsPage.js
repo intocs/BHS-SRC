@@ -59,6 +59,9 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="appContent">
+          <div id="myQuestionsHeader">
+          <h1>My Questions</h1>
+          </div>
           <Header>
             <UserDropdown username={ accData.given_name } myQuestionsDisabled={true} onLogOut={ this.logOut.bind(this) }/>
           </Header>
