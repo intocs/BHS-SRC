@@ -57,11 +57,11 @@ module.exports = function(API, app) {
       }
       var qBody = {$and: query.map(function(q) {
         return {"questionTitle": new RegExp(q, "gi")};
-      }) };
+      }), $where: "this.answers.length > 0"};
 
       console.log(qBody.$and.length > 0 ? qBody : {});
 
-      Question.find(qBody.$and.length > 0 ? qBody : {}).limit(parseInt(req.body.number)).sort({date: -1}).exec(function(err, qs) {
+      Question.find(qBody.$and.length > 0 ? qBody : {$where: "this.answers.length > 0"}).limit(parseInt(req.body.number)).sort({date: -1}).exec(function(err, qs) {
         if (err) {
           console.log(err);
           return;
